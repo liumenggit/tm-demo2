@@ -1,0 +1,105 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^tm-(.*)": "@/tmui/components/tm-$1/tm-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "navigationStyle": "custom",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/my/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/my/feedback",
+      "style": {
+        "navigationBarTitleText": "反馈",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/content/content",
+      "style": {
+        "navigationBarTitleText": "内容",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/info/info",
+      "style": {
+        "navigationBarTitleText": "信息展示",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#9a9a9a",
+    "selectedColor": "#39dcab",
+    "borderStyle": "white",
+    "backgroundColor": "white",
+    "list": [
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心"
+      },
+      {
+        "pagePath": "pages/my/login",
+//        "iconPath": "static/tabar/home-off.png",
+//        "selectedIconPath": "static/tabar/home-on.png",
+        "text": "登录"
+      }
+    ]
+  },
+  "condition": {
+    "current": 1,
+    "list": [
+      {
+        "name": "个人中心",
+        "path": "pages/my/my",
+        "query": ""
+      },
+      {
+        "name": "登录",
+        "path": "pages/my/login",
+        "query": ""
+      },
+      {
+        "name": "反馈",
+        "path": "pages/my/feedback",
+        "query": ""
+      }
+    ]
+  }
+}
