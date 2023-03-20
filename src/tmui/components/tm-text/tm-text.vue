@@ -15,8 +15,8 @@
   <!-- #endif -->
   <!-- #ifndef APP-PLUS-NVUE -->
 
-  <view :render-whole="true" class="flex text-view nv" :class="[_parentClass]">
-
+  <view :render-whole="true" class="flex text-view nv" :class="[_parentClass]" :style="[props.suffixIcon || props.prefixIcon?{flexDirection:'row',alignItems:'center'}:{}]">
+    <tm-icon v-if="props.prefixIcon" :font-size="iconSize" :name="props.prefixIcon" :color="props.iconColor" class="pr-10"></tm-icon>
     <text @click="emits('click', $event)" :selectable="selectable" :user-select="selectable"
       :class="[fontSize ? '' : 'text-size-m', customClass]" :style="[
   props.lineHeight == 'auto'
@@ -31,6 +31,7 @@
 ]">
       <slot>{{ _label }}</slot>
     </text>
+    <tm-icon v-if="props.suffixIcon" :font-size="iconSize" :name="props.suffixIcon" :color="props.iconColor" class="pl-10"></tm-icon>
   </view>
   <!-- #endif -->
 
@@ -40,6 +41,7 @@
  * 文本
  * @description 自带主题和常用属性，能根据全局主题和暗黑自动切换，必须放在tmSheet下，获得更好的主题适应能力。
  */
+import tmIcon from "@/tmui/components/tm-icon/tm-icon.vue"
 import { computed, getCurrentInstance, inject, ref, VNode } from "vue";
 import theme from "../../tool/theme/theme";
 import {
@@ -83,6 +85,22 @@ const props = defineProps({
     type: [Number, String],
     default: "auto",
   },
+  suffixIcon: {
+    type: String,
+    default: null,
+  },
+  prefixIcon:{
+    type: String,
+    default: null,
+  },
+  iconSize:{
+    type: [Number],
+    default: 28,
+  },
+  iconColor:{
+    type: String,
+    default: "",
+  }
 });
 const emits = defineEmits(["click"]);
 const _parentClass = computed(() => props.parentClass);

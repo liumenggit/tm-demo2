@@ -60,12 +60,6 @@ import {
   computed
 } from "vue";
 
-const tabsTitle = ref([
-  {key: "1", title: "选项1", icon: "tmicon-ios-leaf"},
-  {key: "2", title: "选项2", icon: "tmicon-ios-umbrella"},
-  {key: "3", title: "选项3", dot: true, dotColor: 'yellow', icon: "tmicon-ios-rocket"},
-  {key: "4", title: "选项4", dot: false, count: "3", icon: "tmicon-ios-partly-sunny"},
-])
 const waterfallImglist = ref([
   {
     img: 'https://gw.alicdn.com/bao/uploaded/i2/1848622920/O1CN018zBHJ91XRPJ4bHW78_!!0-item_pic.jpg_320x320q90.jpg',

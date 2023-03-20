@@ -1,0 +1,21 @@
+<template>
+  <tm-app>
+    <view id="jintian" class="jintian" style="width: 10vw;height: 10vw"></view>
+    <tm-guide ref="board"></tm-guide>
+    <tm-button @click="proxy.$refs.board.startGuide()" label="清空222"></tm-button>
+  </tm-app>
+</template>
+<script lang="ts" setup>
+import {ref, getCurrentInstance, computed} from "vue"
+
+const {proxy} = getCurrentInstance()
+
+
+import tmSignBoard from "@/tmui/components/tm-sign-board/tm-sign-board.vue"
+
+// const board = ref<InstanceType<typeof tmSignBoard> | null>(null)
+
+
+import tmGuide from "@/tmui/components/tm-guide/tm-guide.vue"
+
+</script>
