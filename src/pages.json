@@ -123,6 +123,11 @@
         "name": "反馈",
         "path": "pages/my/feedback",
         "query": ""
+      },
+      {
+        "name": "测试",
+        "path": "pages/test/test",
+        "query": ""
       }
     ]
   }
