@@ -74,9 +74,9 @@
       }
     },
     {
-      "path": "pages/test/test2",
+      "path": "pages/adsorb/adsorb",
       "style": {
-        "navigationBarTitleText": "测试2",
+        "navigationBarTitleText": "吸附",
         "titlePenetrate": "YES",
         "transparentTitle": "always"
       }

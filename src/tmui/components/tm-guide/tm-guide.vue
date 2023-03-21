@@ -1,10 +1,11 @@
 <template>
-  <view  v-if="guideState">
-    <view @click="guideState=false" class="fulled fulled-height fixed t-0 l-0 zIndex-26"></view>
-    <view @click="guideState=false" class="fixed t-0 l-0 shadow-2 zIndex-n20 rect-shadow"
-          :style="{width:guideItem.width,height:guideItem.height,top:guideItem.top,left:guideItem.left}">
-    </view>
-    <view class="absolute t-50 l-50 zIndex-n20" style="width: 10vw;height: 10vw;background-color: red"></view>
+  <view v-if="guideState">
+    <view class="fulled fulled-height fixed t-0 l-0 zIndex-26"></view>
+    <view class="fixed t-0 l-0 shadow-2 zIndex-n20 boxshadow"
+          :style="Object.assign(renderItem.style,{width:guideItem.width + 'px',height:guideItem.height + 'px',top:guideItem.top + 'px',left:guideItem.left + 'px'})"/>
+    <tm-image v-for="(imageItem,index) in renderItem.img" @click="clickImage(imageItem)"
+              :src="imageItem.src" :width="imageItem.width" :height="imageItem.height" class="fixed zIndex-n20"
+              :style="{top:imageItem.top + guideItem.top + 'px',left:imageItem.left + guideItem.left + 'px'}"/>
   </view>
 </template>
 <script lang="ts" setup>
@@ -19,28 +20,48 @@ import {
   onUnmounted,
   nextTick,
   watch,
-  ssrContextKey,
+  ssrContextKey, Ref,
 } from "vue";
-
-const proxy = getCurrentInstance()?.proxy ?? null;
-const _parentComs = getParent();
-let guideList = ref([])
-let guideState = ref(false)
-let guideIndex = ref(0)
-let guideItem = ref({
-  width: '0px',
-  height: '0px',
-  left: '0px',
-  top: '0px',
+import {guideTItem, guideListItem} from "./interface";
+import {custom_props} from "@/tmui/tool/lib/minxs";
+// let guideList: Array<guideListItem> = []
+let guideList: Ref<guideListItem[]> = ref([])
+let guideState: Ref<boolean> = ref(false)
+let guideIndex: Ref<number> = ref(0)
+let guideItem: Ref<guideTItem> = ref({
+  width: 0,
+  height: 0,
+  left: 0,
+  top: 0,
+  style: '',
+  clickEvent: {}
 })
-console.log('proxy组件', _parentComs)
+const proxy = getCurrentInstance()?.proxy ?? null;
+const parentComs = getParent();
+const renderItem = computed(() => guideList.value[guideIndex.value])
+const renderItemCss = computed(() => guideList.value[guideIndex.value])
 
-// _parentComs.getReactInfo()
 
+// 点击image事件
+function clickImage(imageItem: any) {
+  if (imageItem.isNextButton) clickNextButton();
+  imageItem.clickEvent && imageItem.clickEvent()
+}
+
+// 下一步按钮
+function clickNextButton() {
+  if (guideIndex.value + 1 >= guideList.value.length) {
+    guideState.value = false
+    return
+  }
+  guideIndex.value++
+  renderGuideElement(guideIndex.value)
+}
+
+//获取父级
 function getParent() {
-  //父级方法。
-  let parent = proxy.$parent;
-
+  // console.log('parent',proxy?.$parent?.$options)
+  let parent = proxy?.$parent;
   while (parent) {
     if (parent?.parentNameId == "tmWaterfallId" || !parent) {
       break;
@@ -51,52 +72,51 @@ function getParent() {
   return parent;
 }
 
-function startGuide(list, startIndex) {
-  guideList = list
-  guideIndex = startIndex || 0
+//开始引导
+function startGuide(list: any, startIndex: number) {
+  guideList.value = list
+  guideIndex.value = startIndex || 0
   guideState.value = true
-  renderGuideElement(guideIndex)
-
+  renderGuideElement(guideIndex.value)
 }
 
+//渲染当前引导元素
 function renderGuideElement(index: number) {
-  console.log('渲染', guideList[index].queryClass)
   nextTick(() => {
-    _parentComs.getReactInfo(guideList[index].queryClass).then(res => {
-      console.log('获取到信息', res)
+    getReactInfo(renderItem.value.queryClass).then((res: any) => {
       guideItem.value = {
-        width: res.width + 'px',
-        height: res.height + 'px',
-        left: res.left + 'px',
-        top: res.top + 'px'
+        width: res.width,
+        height: res.height,
+        left: res.left,
+        top: res.top,
+        style: renderItem.value.style
       }
+      // console.log('数据检查', guideState.value, guideItem.value)
     })
   });
+}
 
+//获取元素的信息
+function getReactInfo(queryClass: string) {
+  return new Promise((resolve, reject) => {
+    const query = uni.createSelectorQuery().in(parentComs);
+    query.select(queryClass).boundingClientRect((result) => {
+      // console.log('result', result)
+      if (result) {
+        resolve(result);
+      } else {
+        reject();
+      }
+    }).exec();
+  })
 }
 
 defineExpose({startGuide});
 </script>
 
-
 <style>
-.rect-shadow {
-  /*position: fixed;*/
-  /*border-radius: 12px;*/
-  box-shadow: 0 0 0 3000px rgba(0, 0, 0, 0.8);
-  /*z-index: 101;*/
-  /*left: 0;*/
-  /*top: 0;*/
-  /*transform: translate(-10rpx, -10rpx);*/
-  /*box-sizing: content-box;*/
-  /*border: 10rpx solid #717171;*/
-}
 
-.rect-img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0;
-  height: 0;
+.boxshadow {
+  box-shadow: 0 0 0 3000px rgba(0, 0, 0, 0.6);
 }
 </style>

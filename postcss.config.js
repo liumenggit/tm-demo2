@@ -5,5 +5,6 @@ module.exports = {
   plugins: [
     uniPostcssPlugin(),
     require('autoprefixer')()
-  ]
+  ],
+  transpileDependencies: ['luch-request'],
 }

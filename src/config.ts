@@ -1,13 +1,14 @@
 //config.ts
-import { useTmRouterAfter, useTmRouterBefore } from "./router/index"
+import {useTmRouterAfter, useTmRouterBefore} from "./router/index"
+
 export const config = {
     // 在进阶指南中会讲到类型文件的使用。请注意右右侧文档栏目。
     // 指定了类型后，在里面输入会有类型提示和校验。
     autoDark: true,
-    theme:{},
+    theme: {},
     themeConfig: {
         theme: {},
-        globalFontSizeRatio:1,
+        globalFontSizeRatio: 1,
         dark: {
             /**一般的卡片项目暗黑背景 */
             cardcolor: '#0A0A0B',
@@ -21,12 +22,11 @@ export const config = {
             textDisableColor: 'rgba(100, 100, 100, 1.0)',
 
         },
-        component:{
-
-        }
+        component: {}
     },
-    router: { useTmRouterAfter, useTmRouterBefore },
-    custom:{
-
+    router: {useTmRouterAfter, useTmRouterBefore},
+    routerList: ["pages/my/feedback"],
+    custom: {
+        baseURL: 'https://www.2222222.com'
     }
 } as Tmui.tmuiConfig;

@@ -13,6 +13,7 @@ interface beforeRouterOpts {
  * @param path 页面路径，不带前缀/
  */
 export const useTmRouterBefore = (arg:beforeRouterOpts):void=>{
+	console.log('路由访问前执行的函数')
     // 每一个页面在初化前都会执行
 	//返回事件，只有在h5端可以被拦截。
 	if(arg.path){
@@ -25,6 +26,8 @@ export const useTmRouterBefore = (arg:beforeRouterOpts):void=>{
  * @param opts 页面加载完成后返回的参数
  */
 export const useTmRouterAfter = (arg:beforeRouterOpts):void=>{
+	console.log('路由访问后执行的函数',arg)
+	// if(uni.$tm.config.routerList.includes(arg.path)) uni.navigateTo({url:"/pages/test/test"})
     //每一个页面初始后都会执行
    
 }

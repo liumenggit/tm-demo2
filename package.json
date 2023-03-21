@@ -47,7 +47,9 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-3061320221209001",
     "@vitejs/plugin-vue-jsx": "^2.1.0",
     "echarts": "5.3.2",
+    "luch-request": "^3.0.8",
     "pinia": "^2.0.14",
+    "uni-simple-router": "^2.0.8-beta.4",
     "vue": "^3.2.36",
     "vue-i18n": "^9.1.10"
   },
