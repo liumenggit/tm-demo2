@@ -80,7 +80,7 @@ declare module 'vue' {
     TmSignBoard: typeof import('./components/tm-sign-board/tm-sign-board.vue')['default']
     TmSkeleton: typeof import('./components/tm-skeleton/tm-skeleton.vue')['default']
     TmSkeletonLine: typeof import('./components/tm-skeleton-line/tm-skeleton-line.vue')['default']
-    TmSlideSwitch: typeof import('./components/tm-slide-switch/tm-slide-switch.vue')['default']
+    TmSlideSwitch: typeof import('./components/tm-slide-switch/tm-slide-switch.vue')
     TmSlider: typeof import('./components/tm-slider/tm-slider.vue')['default']
     TmSpin: typeof import('./components/tm-spin/tm-spin.vue')['default']
     TmStatistic: typeof import('./components/tm-statistic/tm-statistic.vue')['default']

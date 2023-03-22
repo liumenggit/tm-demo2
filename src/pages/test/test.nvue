@@ -20,6 +20,7 @@
     </tm-sheet>
     <tm-button label="test" @click="loginTest()"></tm-button>
     <tm-button label="路由" @click="rou()"></tm-button>
+    <tm-button label="fetchTest" @click="fetchTest()"></tm-button>
     <tm-guide ref="easyGuide"></tm-guide>
   </tm-app>
 </template>
@@ -28,8 +29,36 @@ import {ref, getCurrentInstance, computed} from "vue"
 import {onShow, onLoad, onInit} from "@dcloudio/uni-app";
 import {login} from "@/api/AppApi";
 import {routerTo} from "@/tmui/tool/function/util";
+import {fetchConfig} from "@/tmui/tool/lib/interface";
+import {fetchConfigSuccessType} from "@/tmui/tool/lib/interface";
+import http from "@/utils/fetch"
 
 const {proxy} = getCurrentInstance()
+
+function fetchTest() {
+  http({
+    url: '/',
+    method: 'GET'
+  }).then(function (res: any) {
+    console.log('then', res)
+  }).catch(function (err: any) {
+    console.log('err', err)
+  })
+  // uni.$tm.fetch.request({
+  //   url: 'https://www.baidu.com',
+  //   method: 'GET'
+  // }, function (cog: fetchConfig) {
+  //   console.log('请求前', cog)
+  //   if(cog) cog.url = 'https://zhihu.com'
+  //   return cog || {}
+  // }, function (result: fetchConfigSuccessType) {
+  //   console.log('请求成功', result)
+  // }, function (result: fetchConfigSuccessType) {
+  //   console.log('complete', result)
+  // })
+}
+
+
 const parentNameId = "tmWaterfallId";
 defineExpose({parentNameId: parentNameId});
 
@@ -37,6 +66,7 @@ const loginTest = async () => {
   const res = await login({user: 111, password: 123123})
   console.log('res', res)
 }
+
 function rou() {
   routerTo("/pages/info/info", "navigate")
 }
@@ -52,10 +82,10 @@ onLoad(() => {
   //     },
   //     img: [
   //       {
-  //         width: 471,
-  //         height: 378,
-  //         left: 25,
-  //         top: 50,
+  //         width: 600,
+  //         height: 480,
+  //         left: 15,
+  //         top: 100,
   //         src: '/static/yundaomeiyuajn.png',
   //         isNextButton: true,
   //         clickEvent: () => {

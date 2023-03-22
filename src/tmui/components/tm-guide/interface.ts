@@ -19,5 +19,5 @@ export interface img {
     top?: number,
     src: string,
     isNextButton: boolean,
-    clickEvent?: object
+    clickEvent?: Function
 }

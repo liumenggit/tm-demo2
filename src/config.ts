@@ -27,6 +27,6 @@ export const config = {
     router: {useTmRouterAfter, useTmRouterBefore},
     routerList: ["pages/my/feedback"],
     custom: {
-        baseURL: 'https://www.2222222.com'
+        baseURL: 'https://www.baidu.com'
     }
 } as Tmui.tmuiConfig;

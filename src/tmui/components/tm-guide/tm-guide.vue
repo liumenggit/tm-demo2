@@ -2,10 +2,10 @@
   <view v-if="guideState">
     <view class="fulled fulled-height fixed t-0 l-0 zIndex-26"></view>
     <view class="fixed t-0 l-0 shadow-2 zIndex-n20 boxshadow"
-          :style="Object.assign(renderItem.style,{width:guideItem.width + 'px',height:guideItem.height + 'px',top:guideItem.top + 'px',left:guideItem.left + 'px'})"/>
+          :style="Object.assign(renderItem.style,{width:guideItem.width + 'rpx',height:guideItem.height + 'rpx',top:guideItem.top + 'rpx',left:guideItem.left + 'rpx'})"/>
     <tm-image v-for="(imageItem,index) in renderItem.img" @click="clickImage(imageItem)"
               :src="imageItem.src" :width="imageItem.width" :height="imageItem.height" class="fixed zIndex-n20"
-              :style="{top:imageItem.top + guideItem.top + 'px',left:imageItem.left + guideItem.left + 'px'}"/>
+              :style="{top:imageItem.top + guideItem.top + 'rpx',left:imageItem.left + guideItem.left + 'rpx'}"/>
   </view>
 </template>
 <script lang="ts" setup>
@@ -24,6 +24,7 @@ import {
 } from "vue";
 import {guideTItem, guideListItem} from "./interface";
 import {custom_props} from "@/tmui/tool/lib/minxs";
+import {torpx} from "@/tmui/tool/function/util";
 // let guideList: Array<guideListItem> = []
 let guideList: Ref<guideListItem[]> = ref([])
 let guideState: Ref<boolean> = ref(false)
@@ -33,8 +34,9 @@ let guideItem: Ref<guideTItem> = ref({
   height: 0,
   left: 0,
   top: 0,
-  style: '',
-  clickEvent: {}
+  style: {},
+  clickEvent: function (): void {
+  }
 })
 const proxy = getCurrentInstance()?.proxy ?? null;
 const parentComs = getParent();
@@ -85,10 +87,10 @@ function renderGuideElement(index: number) {
   nextTick(() => {
     getReactInfo(renderItem.value.queryClass).then((res: any) => {
       guideItem.value = {
-        width: res.width,
-        height: res.height,
-        left: res.left,
-        top: res.top,
+        width: torpx(res.width),
+        height: torpx(res.height),
+        left: torpx(res.left),
+        top: torpx(res.top),
         style: renderItem.value.style
       }
       // console.log('数据检查', guideState.value, guideItem.value)

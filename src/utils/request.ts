@@ -22,8 +22,8 @@ http.interceptors.request.use((config: HttpRequestConfig) => {
             ...config.header,
             a: 2
         }
-        if (config.custom.auth) config.header.Authorization = jwt.getAccessToken();
-        if (config.custom.loading) uni.showLoading({mask: true})
+        if (config.custom?.auth) config.header.Authorization = jwt.getAccessToken();
+        if (config.custom?.loading) uni.showLoading({mask: true})
         return config
     }, (config: HttpRequestConfig) => {
         return Promise.reject(config)
@@ -31,8 +31,8 @@ http.interceptors.request.use((config: HttpRequestConfig) => {
 )
 // 请求之后拦截
 http.interceptors.response.use(async (response: HttpResponse) => {
-    if (response.config.custom.loading) uni.hideLoading()
-    if (response.config.custom.auth) {
+    if (response.config.custom?.loading) uni.hideLoading()
+    if (response.config.custom?.auth) {
         switch (response.data.code) {
             case 4011:
                 //刷新token并从新发起请求
