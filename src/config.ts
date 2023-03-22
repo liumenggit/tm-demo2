@@ -27,6 +27,7 @@ export const config = {
     router: {useTmRouterAfter, useTmRouterBefore},
     routerList: ["pages/my/feedback"],
     custom: {
-        baseURL: 'http://example.com'
+        baseURL: 'http://example.com',
+        mockURL: 'http://example.com'
     }
 } as Tmui.tmuiConfig;

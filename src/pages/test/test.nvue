@@ -19,23 +19,16 @@
       </tm-grid>
     </tm-sheet>
     <tm-button label="路由" @click="rou()"></tm-button>
-    <tm-button label="fetchTest" @click="loginTest()"></tm-button>
     <tm-guide ref="easyGuide"></tm-guide>
   </tm-app>
 </template>
 <script lang="ts" setup>
 import {ref, getCurrentInstance} from "vue"
 import {onShow, onLoad, onInit} from "@dcloudio/uni-app";
-import {login} from "@/api/AppApi";
 import {routerTo} from "@/tmui/tool/function/util";
 const proxy = getCurrentInstance()?.proxy ?? null;
 const parentNameId = "tmWaterfallId";
 defineExpose({parentNameId: parentNameId});
-
-const loginTest = async () => {
-  const res = await login('code')
-  console.log('res', res.data)
-}
 
 function rou() {
   // routerTo("/pages/info/info", "navigate")
