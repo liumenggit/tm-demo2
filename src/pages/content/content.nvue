@@ -1,14 +1,14 @@
 <template>
   <tm-app ref="app">
-    <tm-tabs :width="750" :height="300" default-name="listCard" itemModel="line" activeColor="primary"
+    <tm-tabs :width="750" :height="1390" default-name="listCard" itemModel="line" activeColor="primary"
              activeFontColor="primary">
       <tm-tabs-pane name="listCard" title="列表卡片" :height="1350">
-        <tm-virtual-list :load="getdata" :width="750" :height="1390" :data="imglist" :itemHeight="334">
+        <tm-virtual-list :load="getData" :width="750" :height="1390" :data="cardList" :itemHeight="334">
           <template v-slot:default="{data}">
             <tm-sheet borderDirection="bottom" :height="334"
                       _class="flex flex-row flex-row-center-start" :padding="[0,0]" :margin="[0,0]"
                       v-for="(item,index) in data" :key="index">
-              <tm-card status="2022-5-2" :title="'image-Row-'+item.index" content="这是一个基础卡片示例，非常简单且实用。这是一个基础卡片示例，非常简单且实用。">
+              <tm-card status="2022-5-2" :title="item.email" content="这是一个基础卡片示例，非常简单且实用。这是一个基础卡片示例，非常简单且实用。">
                 <template v-slot:action>
                   <view class="flex flex-row flex-row-center-end flex-1">
                     <tm-button :round="24" :margin="[24,0]" label="确认" :font-size="24" :width="120" :height="64"></tm-button>
@@ -21,14 +21,14 @@
         </tm-virtual-list>
       </tm-tabs-pane>
       <tm-tabs-pane name="list" title="列表" :height="1350">
-        <tm-virtual-list :load="getdata" :width="750" :height="1390" :data="imglist" :itemHeight="160">
+        <tm-virtual-list :load="getdata" :width="750" :height="1390" :data="cardList" :itemHeight="160">
           <template v-slot:default="{data}">
             <tm-sheet :border="1" borderDirection="bottom" :height="160"
                       _class="flex flex-row flex-row-center-start" :padding="[0,0]" :margin="[0,0]"
                       v-for="(item,index) in data" :key="index">
               <view class="flex flex-row flex-row-center-between flex-1">
-                <tm-image :width="200" :height="100" :src="item.src"></tm-image>
-                <tm-text :label="'image-Row-'+item.index"></tm-text>
+                <tm-image :width="200" :height="100" src=""></tm-image>
+                <tm-text :label="item.email"></tm-text>
               </view>
             </tm-sheet>
           </template>
@@ -49,7 +49,6 @@
         </tm-waterfall>
       </tm-tabs-pane>
     </tm-tabs>
-
   </tm-app>
 </template>
 <script lang="ts" setup>
@@ -59,7 +58,8 @@ import {
   getCurrentInstance,
   computed
 } from "vue";
-
+import {contentList, login} from "@/api/AppApi";
+const cardList = ref([])
 const waterfallImglist = ref([
   {
     img: 'https://gw.alicdn.com/bao/uploaded/i2/1848622920/O1CN018zBHJ91XRPJ4bHW78_!!0-item_pic.jpg_320x320q90.jpg',
@@ -116,29 +116,19 @@ const waterfallImglist = ref([
     num: "1500+人购买"
   },
 ])
-const imglist = ref([])
-const getdata = (e: string) => {
+const getData = (e: string) => {
   return new Promise((res, rej) => {
-    // setTimeout(function () {
       if (e == 'top') {
-        imglist.value = []
-        for (let i = 0; i < 10; i++) {
-          imglist.value.push({
-            src: 'https://i0.pickpik.com/photos/298/434/513/beach-dawn-dusk-ocean-thumb.jpg',
-            index: i
-          })
-        }
+        cardList.value = []
+        contentList({page: 1, limit: 10}).then(function (res:any){
+          cardList.value = cardList.value.concat(res.data.list)
+        })
       } else if (e == 'bottom') {
-        let len = imglist.value.length;
-        for (let i = len; i < 10 + len; i++) {
-          imglist.value.push({
-            src: 'https://i0.pickpik.com/photos/298/434/513/beach-dawn-dusk-ocean-thumb.jpg',
-            index: i
-          })
-        }
+        contentList({page: 1, limit: 10}).then(function (res:any){
+          cardList.value = cardList.value.concat(res.data.list)
+        })
       }
       res(true)
-    // }, 2500);
   })
 }
 </script>
