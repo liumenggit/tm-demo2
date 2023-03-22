@@ -7,8 +7,6 @@ export const defaultCellStyle:tabaleCellStyleType = {
     transparent:true,
     asyncStyleCell:false,
     sort:false,
-    iconSize:26,
-    round:6,
 }
 export interface tabaleCellData {
     value:string|number,
@@ -20,8 +18,6 @@ export interface tabaleCellStyleType {
     color?:string,
     fontColor?:string,
     fontSize?:number,
-    iconSize?:number,
-    round?:number,
     light?:boolean,
     transparent?:boolean,
     /**是否头和所在列同步同的背景色和文字色,注意该参数只在header中的opts有效 */

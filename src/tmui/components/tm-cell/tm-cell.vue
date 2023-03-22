@@ -15,7 +15,6 @@
       :borderDirection="props.borderDirection"
       :text="props.text"
       :transprent="props.transprent"
-      :linear-color="props.linearColor"
       :linear="props.linear"
       :linearDeep="props.linearDeep"
       :width="props.width"

@@ -21,7 +21,7 @@
     :margin="[0, 0]"
     :padding="[0, 0]"
     :width="_width"
-    :height="props.height"
+    :height="_height"
   >
     <view
       v-if="sc_top < -30 && reFresh != 0 && !tabsSwiperDisAbledPull"
@@ -59,10 +59,10 @@
     <scroll-view
       @scrolltolower="onScrollBootom"
       @scroll="onScroll"
-      :scroll-y="props.height ? true : false"
+      :scroll-y="_height ? true : false"
       enable-flex
       class="flex-col"
-      :style="[{ width: _width + 'rpx' }, props.height ? { height: props.height + 'rpx' } : '']"
+      :style="[{ width: _width + 'rpx' }, _height ? { height: _height + 'rpx' } : '']"
     >
       <view
         @touchStart="onScrollStart"
@@ -140,10 +140,6 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  height: {
-    type: Number,
-    default: "",
-  },
   pullFun: {
     type: [Function] as PropType<(type: "top" | "bottom") => boolean>,
     default: () => {
@@ -184,7 +180,6 @@ if (typeof _pname.value != "undefined" && _pname.value != "") {
     dot: props.dot,
     count: props.count,
     dotColor: props.dotColor,
-    height:props.height
   });
 }
 
@@ -238,7 +233,7 @@ const isShowRender = computed(() => {
 });
 
 watch(
-  [() => props.title, () => props.icon, () => props.dot, () => props.dotColor,()=>props.count,()=>props.height],
+  [() => props.title, () => props.icon, () => props.dot, () => props.dotColor,()=>props.count],
   () => {
     parent?.setTitle({
       key: _pname.value,
@@ -247,7 +242,6 @@ watch(
       dot: props.dot,
 	  count: props.count,
       dotColor: props.dotColor,
-      height:props.height
     });
   }
 );

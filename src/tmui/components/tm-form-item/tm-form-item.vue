@@ -54,7 +54,7 @@
             <slot></slot>
           </view>
         </view>
-        <view v-if="props.desc" :class="props.desc ? 'pt-12' : ''">
+        <view :class="props.desc ? 'pt-12' : ''">
           <slot name="desc">
             <tm-text color="grey-darken-2" :font-size="22" :label="props.desc"></tm-text>
           </slot>

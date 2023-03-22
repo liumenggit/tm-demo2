@@ -7,15 +7,15 @@
 
   <view class="tableBox" :style="[{ width: props.width + 'rpx' },props.height?{ height: props.height + 'rpx'}:'']">
     <tm-row v-if="props.showHeader" :transprent="true" :width="totalTableWidth" :column="_data.header.length">
-      <tm-col
+      <tm-col 
       _class="flex flex-row flex-row-center-center"
       :text="item.opts?.light??false"
-      :height="props.headerHeight" :color="item.opts?.color??'primary'" :transprent="false"
+      :height="props.headerHeight" :color="item.opts?.color??'primary'" :transprent="false" 
       v-for="(item, index) in _data.header" :key="index"
       @click="headerClick(item,index)"
       >
         <view :style="{width:((item.opts?.sort??false)?(totalTableWidth/_data.header.length-60):(totalTableWidth/_data.header.length-60))+'rpx'}">
-          <tm-text
+          <tm-text 
           _class="text-overflow-2 text-align-center"
           :line-height="0"
           :font-size="item.opts?.fontSize??0" :color="item.opts?.fontColor??''" :label="item.name"></tm-text>
@@ -28,52 +28,34 @@
       <view :style="{width:totalTableWidth+'rpx'}">
         <tm-divider color='grey-5' v-if="props.showBottomBorder&&!_stripe" :margin="[0,0]"></tm-divider>
       </view>
-      <tm-row
-      :color="_stripe?(index%2?'grey-5':'white'):'white'"
+      <tm-row  
+      :color="_stripe?(index%2?'grey-5':'white'):'white'" 
       :width="totalTableWidth" :column="_data.header.length"
       :transprent="false"
       >
-        <tm-col
-        :text="getOptsCellStyle(index2, index)?.light??false"
-        :height="props.cellHeight" v-for="(item2, index2) in _data.header.length" :key="item2"
+        <tm-col 
+        :text="getOptsCellStyle(index2, index)?.light??false" 
+        :height="props.cellHeight" v-for="(item2, index2) in _data.header.length" :key="item2" 
         :color="getOptsCellStyle(index2, index)?.color??''"
         :transprent="_stripe"
         @click="cellClick(index2,index)"
         _class="flex flex-row flex-row-center-center">
           <view class="flex-1" v-if="((_rows[index2] ?? [])[index].opts?.type??'text')=='button'">
             <tm-button
-
+            
             :font-size="getOptsCellStyle(index2, index)?.fontSize??26"
             :color="getOptsCellStyle(index2, index)?.fontColor??'primary'"
             :label="(_rows[index2] ?? [])[index].value ?? '-'" :margin="[10,10]" :height="props.cellHeight-20" size="mini" block ></tm-button>
           </view>
-          <view class="flex-1 flex-row flex-row-center-center nowrap" v-if="((_rows[index2] ?? [])[index].opts?.type??'text')=='avatar'">
-            <tm-avatar :img="(_rows[index2] ?? [])[index].value?.avatar ?? '-'"
-                       :size="getOptsCellStyle(index2, index)?.iconSize??26"
-                       :round="getOptsCellStyle(index2, index)?.round??6"
-                       class="pr-10"
-            />
-            <tm-text
-                :font-size="getOptsCellStyle(index2, index).fontSize"
-                :line-height="0"
-                :color="getOptsCellStyle(index2, index).fontColor"
-                :label="(_rows[index2] ?? [])[index].value?.username ?? '-'">
-
-            </tm-text>
-          </view>
-          <view class="flex-1 flex-row flex-row-center-center" v-else-if="((_rows[index2] ?? [])[index].opts?.type??'text')=='ranking'">
-            <tm-avatar :size="getOptsCellStyle(index2, index)?.iconSize??26"
-                       :round="getOptsCellStyle(index2, index)?.round??6"
-                       :img="(_rows[index2] ?? [])[index].value ?? '-'"
-            />
-          </view>
-          <tm-text v-else :font-size="getOptsCellStyle(index2, index).fontSize"
+          <tm-text
+          v-else 
+          :font-size="getOptsCellStyle(index2, index).fontSize"
           :line-height="0"
           :color="getOptsCellStyle(index2, index).fontColor"
           :label="(_rows[index2] ?? [])[index].value ?? '-'"></tm-text>
         </tm-col>
       </tm-row>
-
+      
     </block>
   </view>
 
@@ -104,7 +86,7 @@ let tid:any = NaN;
 const _stripe = computed(()=>props.stripe)
 const totalTableWidth = computed(() => {
   let d = props.cellWidth *  _data.value.header.length;
-
+  
   if (d <= props.width) d = props.width;
   return d;
 })
@@ -125,9 +107,9 @@ watch(
       _data.value = {...cdatas}
       _rows.value = chuliRows(_data.value.data)
       _rows_back = uni.$tm.u.deepClone(_rows.value)
-
+     
     }, 150);
-
+    
   },
   { deep: true }
 );
@@ -152,13 +134,13 @@ function chuliRows(bigdata: Array<{ [key: string]: any }>) {
     el['opts'] = ptps;
     return el;
   })
-
+ 
   _data.value.header.forEach(el => {
-
+    
     let pd: Array<tabaleCellData> = []
     pd = _data.value.data.map((ele: { [key: string]: any }) =>{
       let isasync = el?.opts?.asyncStyleCell??false
-
+      
       return {
         value: ele[el.field] ?? '-',
         opts:
@@ -175,7 +157,7 @@ function chuliRows(bigdata: Array<{ [key: string]: any }>) {
 
     d.push(pd)
     dlen.push(pd.length)
-
+    
   })
   _maxrows.value = Math.max(...dlen)
   return d;
@@ -224,7 +206,7 @@ function sort(data:Array<Array<tabaleCellData>>,index:number, type = "none",call
       }
       pd.push(p)
     });
-
+    
     data = pd;
   }
   //升序。
@@ -235,12 +217,12 @@ function sort(data:Array<Array<tabaleCellData>>,index:number, type = "none",call
       p = [...element.reverse()]
       pd.push(p)
     });
-
+    
     data = pd;
   }
 
   nextTick(() => {
-
+    
     if(callback){
       callback(data)
     }
@@ -252,10 +234,10 @@ function headerClick(item:headerType,index:number){
     let d = uni.$tm.u.deepClone(_rows.value)
     if(sortType.value=='none'){
       sortType.value = 'desc'
-
+      
     }else if(sortType.value=='desc'){
       sortType.value = 'asce'
-
+      
     }else if(sortType.value=='asce'){
       sortType.value = 'none'
     }
