@@ -48,11 +48,15 @@ export function userLogin(code: string) {
     })
 }
 
-Mock.mock(mockUrl + 'user/login', {
-    'list|10': [{
-        'id|+1': 1,
-        'email': '@EMAIL'
-    }]
+Mock.mock('user/login', {
+    'userInfos': {
+        'userName': '@FIRST',
+        'photo': '@FIRST',
+        'time': '@FIRST',
+        'roles': [],
+        'authBtnList': [],
+    },
+    'token': '@LAST'
 })
 
 //退出登录
@@ -62,7 +66,7 @@ export function userLogout() {
     })
 }
 
-Mock.mock(mockUrl + 'user/logout', {
+Mock.mock('user/logout', {
     msg: '退出成功'
 })
 
@@ -74,7 +78,7 @@ export function userUpdate(userInfo: object) {
     })
 }
 
-Mock.mock(mockUrl + 'user/update', {
+Mock.mock('user/update', {
     msg: '更新成功'
 })
 
@@ -86,7 +90,7 @@ export function userInfo() {
     })
 }
 
-Mock.mock(mockUrl + 'user', {
+Mock.mock('user', {
     userName: '用户昵称'
 })
 

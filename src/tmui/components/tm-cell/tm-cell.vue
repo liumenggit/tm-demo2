@@ -17,6 +17,7 @@
       :transprent="props.transprent"
       :linear="props.linear"
       :linearDeep="props.linearDeep"
+      :linearColor="props.linearColor"
       :width="props.width"
       :height="props.height"
       :margin="props.margin"
