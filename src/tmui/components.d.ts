@@ -109,6 +109,7 @@ declare module 'vue' {
     TmWatermark: typeof import('./components/tm-watermark/tm-watermark.vue')['default']
     TmWeekbar: typeof import('./components/tm-weekbar/tm-weekbar.vue')['default']
     TmGuide: typeof import('./components/tm-guide/tm-guide.vue')['default']
+    TmXima: typeof import('./components/tm-xima/tm-xima.vue')['default']
   }
 }
 

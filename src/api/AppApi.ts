@@ -1,7 +1,7 @@
 import http from "@/utils/fetch"
 import Mock from "better-mock/dist/mock.mp";
 
-Mock.setup({timeout: 400})
+Mock.setup({timeout: 2000})
 
 const mockUrl = uni.$tm.config.custom?.mockUrl
 // create      添加
