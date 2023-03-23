@@ -7,7 +7,7 @@ interface custom {
 
 function http(cog: fetchConfig) {
     return uni.$tm.fetch.request(cog, function (cog: fetchConfig) {
-        console.log('请求前', cog)
+        // console.log('请求前', cog)
         if (cog) cog.url = uni.$tm.config.custom?.baseURL + cog.url
         return cog || {}
     }, function (result: fetchConfigSuccessType) {
@@ -17,7 +17,7 @@ function http(cog: fetchConfig) {
         switch (result.statusCode) {
             case 404:
                 uni.showToast({
-                    icon:'error',
+                    icon: 'error',
                     title: String(result.statusCode)
                 })
         }

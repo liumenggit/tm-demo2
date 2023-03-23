@@ -1,6 +1,7 @@
 <template>
 </template>
 <script lang="ts" setup>
+console.log('env', process.env.NODE_ENV)
 </script>
 <style>
 
