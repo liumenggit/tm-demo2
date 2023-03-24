@@ -1,7 +1,7 @@
 import http from "@/utils/fetch"
 import Mock from "better-mock/dist/mock.mp";
 
-Mock.setup({timeout: 2000})
+// Mock.setup({timeout: 200})
 
 const mockUrl = uni.$tm.config.custom?.mockUrl
 // create      添加
@@ -113,4 +113,73 @@ Mock.mock('/list', {
         'id|+1': 1,
         'email': '@EMAIL'
     }]
+})
+
+//推荐
+export function indexCommend() {
+    return http({
+        url: 'index/commend',
+        method: "GET"
+    })
+}
+
+Mock.mock('index/commend', {
+    carousel: [
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+    ],
+    'grid|10': [{
+        url: 'page/index/index',
+        image: "https://picsum.photos/720/300",
+        'title|+1': 1,
+        'class|+1': 1,
+    }],
+    'notice': ['一一二二三三四五', '七七七八八九九'],
+    'list|20': [{
+        rightDetail: {
+            title: '标题',
+            subtitle: '副标题',
+            time: '有效期时间文本'
+        },
+        type: '小说',
+        thumb: "https://picsum.photos/100/100",
+    }],
+})
+
+//商品
+
+export function indexShop() {
+    return http({
+        url: 'index/shop',
+        method: "GET"
+    })
+}
+
+Mock.mock('index/shop', {
+    carousel: [
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+        "https://picsum.photos/720/300",
+    ],
+    'grid|10': [{
+        url: 'page/index/index',
+        image: "https://picsum.photos/720/300",
+        'title|+1': 1,
+        'class|+1': 1,
+    }],
+    'notice': ['一一二二三三四五', '七七七八八九九'],
+    'list|20': [{
+        rightDetail: {
+            title: '标题',
+            subtitle: '副标题',
+            time: '有效期时间文本'
+        },
+        type: '小说',
+        thumb: "https://picsum.photos/100/100",
+    }],
 })
