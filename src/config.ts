@@ -28,6 +28,11 @@ export const config = {
     routerList: ['pages/my/feedback'],
     custom: {
         baseURL: process.env.NODE_ENV == 'development' ? '' : 'https://www.build.com',
-        mockURL: ''
+        mockURL: '',
+        //需要授权的页面
+        auth: [
+            // 'pages/my/my'
+        ],
+        login: '/pages/my/login'
     }
 } as Tmui.tmuiConfig;

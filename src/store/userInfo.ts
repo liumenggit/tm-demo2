@@ -5,10 +5,10 @@ export const useUserInfo = defineStore('userInfo', {
     state: (): UserInfosStates => ({
         userInfos: uni.getStorageSync('userInfo') || {
             userName: '',
-            photo: '',
             time: '',
             roles: [],
             authBtnList: [],
+            avatar: ''
         },
         token: uni.getStorageSync('token'),
     }),
@@ -18,6 +18,14 @@ export const useUserInfo = defineStore('userInfo', {
             uni.setStorageSync('userInfo', userInfos)
             this.userInfos = userInfos
             console.log(this.userInfos)
+        },
+        async setUserAvatar(avatar: string) {
+            this.userInfos.avatar = avatar
+            uni.setStorageSync('userInfo', this.userInfos)
+        },
+        async setUserName(userName: string) {
+            this.userInfos.userName = userName
+            uni.setStorageSync('userInfo', this.userInfos)
         },
         async setToken(token: string) {
             // 存储用户信息到浏览器缓存

@@ -133,7 +133,7 @@ Mock.mock('index/commend', {
     ],
     'grid|10': [{
         url: 'page/index/index',
-        image: "https://picsum.photos/720/300",
+        image: "https://picsum.photos/80/80",
         'title|+1': 1,
         'class|+1': 1,
     }],

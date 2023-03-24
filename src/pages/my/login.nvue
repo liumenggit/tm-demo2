@@ -1,6 +1,11 @@
 <template>
-  <tm-app ref="app">
-    <tm-sheet transprent style="padding-top: 10vh">
+  <tm-app ref="app" bg-img="https://picsum.photos/750/1448">
+    <tm-navbar title="" transprent>
+      <template v-slot:right>
+        <tm-icon _class="px-32" name="tmicon-plus"></tm-icon>
+      </template>
+    </tm-navbar>
+    <tm-sheet transprent>
       <tm-text label="TMUI3.0" font-size="40"></tm-text>
       <tm-text label="欢迎您登录，使用TMUI3.0登录模板" parent-class="my-20"></tm-text>
       <tm-input v-model="test" placeholder="输入用户名" height="80" round="25" color="rgba(255, 255, 255, 0.5)"

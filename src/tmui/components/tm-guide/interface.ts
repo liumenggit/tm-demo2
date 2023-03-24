@@ -18,6 +18,9 @@ export interface img {
     left?: number,
     top?: number,
     src: string,
+    style?: object,
+    class?: string,
+    round?: number,
     isNextButton: boolean,
     clickEvent?: Function
 }

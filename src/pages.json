@@ -80,6 +80,14 @@
         "titlePenetrate": "YES",
         "transparentTitle": "always"
       }
+    },
+    {
+      "path": "pages/my/revise",
+      "style": {
+        "navigationBarTitleText": "修改信息",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
     }
   ],
   "globalStyle": {
@@ -99,12 +107,6 @@
         "iconPath": "static/tabar/compass-of.png",
         "selectedIconPath": "static/tabar/compass-on.png",
         "text": "首页"
-      },
-      {
-        "pagePath": "pages/my/login",
-        "iconPath": "static/tabar/compass-of.png",
-        "selectedIconPath": "static/tabar/compass-on.png",
-        "text": "登录"
       },
       {
         "pagePath": "pages/test/test",

@@ -4,6 +4,7 @@
     <view class="fixed t-0 l-0 shadow-2 zIndex-n20 boxshadow"
           :style="Object.assign(renderItem.style,{width:guideItem.width + 'rpx',height:guideItem.height + 'rpx',top:guideItem.top + 'rpx',left:guideItem.left + 'rpx'})"/>
     <tm-image v-for="(imageItem,index) in renderItem.img" @click="clickImage(imageItem)"
+              :round="imageItem.round"
               :src="imageItem.src" :width="imageItem.width" :height="imageItem.height" class="fixed zIndex-n20"
               :style="{top:imageItem.top + guideItem.top + 'rpx',left:imageItem.left + guideItem.left + 'rpx'}"/>
   </view>

@@ -1,0 +1,65 @@
+<template>
+  <tm-app ref="app">
+    <button class="pa-0" open-type="chooseAvatar" @chooseavatar="setAvatar">
+      <tm-cell title="头像" :margin="[0, 0]" :titleFontSize="30" bottomBorder>
+        <template v-slot:rightText>
+          <!--        <tm-button :bind:chooseavatar="setAvatar" open-type="chooseAvatar" label="头像" size="mini"></tm-button>-->
+          <tm-avatar :img="store.userInfos.avatar" :size="60" :round="26"></tm-avatar>
+
+        </template>
+      </tm-cell>
+    </button>
+    <!--    <input type="nickname" class="weui-input" placeholder="请输入昵称"/>-->
+    <tm-cell title="昵称" @click="modalUserName = true" :right-text="store.userInfos.userName" :margin="[0, 0]"
+             :titleFontSize="30" bottomBorder/>
+    <tm-cell title="手机号" :right-text="store.userInfos.phone" :margin="[0, 0]" :titleFontSize="30"/>
+    <tm-cell title="微信" showAvatar avatar="https://picsum.photos/200"
+             :margin="[0, 0]" :titleFontSize="30" class="mt-20">
+      <template v-slot:right>
+        <tm-button label="绑定" size="small" :padding="[0,0]" :margin="[0,0]"></tm-button>
+      </template>
+    </tm-cell>
+    <tm-cell title="QQ" showAvatar avatar="https://picsum.photos/200"
+             :margin="[0, 0]" :titleFontSize="30" class="mt-20">
+      <template v-slot:right>
+        <tm-button label="绑定" size="small" :padding="[0,0]" :margin="[0,0]"></tm-button>
+      </template>
+    </tm-cell>
+    <tm-modal title="修改手机号" @ok="setUserName" v-model:show="modalUserName">
+      <input type="nickname" id="nickname-input"/>
+    </tm-modal>
+  </tm-app>
+</template>
+<script lang="ts" setup>
+import {useUserInfo} from '@/store/userInfo'
+import {getCurrentInstance, ref} from "vue";
+
+const proxy = getCurrentInstance()?.proxy ?? null;
+const store = useUserInfo()
+const modalUserName = ref(false)
+// 设置手机号
+const setPhone = function () {
+  console.log('确定')
+}
+// 设置头像
+const setAvatar = function (e: any) {
+  console.log('setAvatar', e.detail.avatarUrl)
+  store.setUserAvatar(e.detail.avatarUrl)
+}
+// 设置昵称
+const setUserName = function () {
+  console.log('setUserName')
+  const query = uni.createSelectorQuery().in(proxy);
+  query.select("#nickname-input").fields({
+    properties: ["value"]
+  }, (result) => {
+    store.setUserName(result.value)
+  }).exec()
+}
+</script>
+
+<style>
+button::after {
+  border: none;
+}
+</style>

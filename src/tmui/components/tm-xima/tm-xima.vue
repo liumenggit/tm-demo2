@@ -26,11 +26,12 @@
           </view>
         </slot>
       </tm-sheet>
-      <view class="flex flex-col relative" v-if="first">
-        <view :style="{ width: `${props.width}rpx` }">
-          <slot name="default" :data="props.data"></slot>
-        </view>
-      </view>
+      <slot name="default" :data="props.data" v-if="first"></slot>
+      <!--      <view class="flex flex-col relative" v-if="first">-->
+      <!--        <view :style="{ width: `${props.width}rpx` }">-->
+      <!--         -->
+      <!--        </view>-->
+      <!--      </view>-->
     </scroll-view>
   </view>
 </template>

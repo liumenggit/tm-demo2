@@ -12,20 +12,21 @@
       <view class="flex-row flex-row-center-between nowrap">
         <tm-avatar icon="tmicon-QQ" :size="70" round="25" color="white"></tm-avatar>
         <tm-text class="pl-10" :label="store.userInfos.userName"></tm-text>
-        <view class="flex-1 flex-row-bottom-end">
-          <tm-icon :font-size="50" name="tmicon-playcircle-fill"></tm-icon>
-        </view>
+        <navigatoar url="/pages/my/revise" class="flex-1 flex-row-bottom-end">
+          <tm-icon :font-size="20" name="tmicon-angle-right"></tm-icon>
+        </navigatoar>
       </view>
     </tm-sheet>
-    <tm-cell showAvatar avatar="https://picsum.photos/200" :round="3" :titleFontSize="30" title="VIP会员"
-             rightText="免费领取7天会员"
-             :linearColor="['#FBDBBD','#FABF87']" linear="left" class="mb-40"/>
+    <tm-cell showAvatar avatar="https://picsum.photos/200" :round="3" :titleFontSize="24"
+             title="VIP会员" rightText="免费领取7天会员"
+             :padding="[12,12]" :linearColor="['#FBDBBD','#FABF87']" linear="left" class="mb-20"/>
     <view class="mx-32 round-3 overflow">
       <tm-cell :round="3" :margin="[0, 0,0,16]" :titleFontSize="30" title="头像 Avatar"/>
       <tm-cell :round="3" :margin="[0, 0,0,16]" rightText="简单组件简单组件" :titleFontSize="30"
                title="徽标 Badge"></tm-cell>
       <tm-cell :round="3" :margin="[0, 0,0,16]" rightColor="red" rightText="2个" :titleFontSize="30"
                title="卡片 Card"></tm-cell>
+
     </view>
     <tm-card status="2022-5-2" title="卡片标题" :round="3">
       <template v-slot:content>
