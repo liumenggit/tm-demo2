@@ -49,14 +49,22 @@ export function userLogin(code: string) {
 }
 
 Mock.mock('user/login', {
-    'userInfos': {
-        'userName': '@FIRST',
-        'photo': '@FIRST',
-        'time': '@FIRST',
-        'roles': [],
-        'authBtnList': [],
+    msg: '登录成功',
+    code: 200,
+    userInfos: {
+        userName: '刘老六',
+        phone: '18647012056',
+        avatar: 'https://picsum.photos/80/80',
+        roles: [],
+        authBtnList: [],
+        auth: {
+            card: {
+                name: '刘老六',
+                cardId: '152104199312251919'
+            }
+        }
     },
-    'token': '@LAST'
+    token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv'
 })
 
 //退出登录
@@ -182,4 +190,96 @@ Mock.mock('index/shop', {
         type: '小说',
         thumb: "https://picsum.photos/100/100",
     }],
+})
+
+// 发送验证码
+export function phoneCodeSend(phone: number) {
+    return http({
+        url: 'phone/code/send',
+        data: {
+            phone: phone
+        }
+    })
+}
+
+Mock.mock('phone/code/send', {
+    msg: '发送成功'
+})
+
+// 手机验证码验证
+interface PhoneCodeVerify {
+    phone: number,
+    code: number,
+}
+
+// 验证用户手机号
+export function phoneCodeVerify(verify: PhoneCodeVerify) {
+    return http({
+        url: 'phone/code/verify',
+        data: verify
+    })
+}
+
+Mock.mock('phone/code/verify', function (options: any) {
+    return {
+        code: options.body.code == 1234 ? 200 : 400,
+        msg: options.body.code == 1234 ? '验证成功' : '验证码错误',
+        phone: options.body.phone
+    }
+})
+
+//更新你用户昵称
+export function userSetNickName(userName: string) {
+    return http({
+        url: 'user/set/nickname',
+        data: {
+            userName: userName
+        }
+    })
+}
+
+Mock.mock('user/set/nickname', function (options: any) {
+    return {
+        code: options.body.userName !== "违法" ? 200 : 400,
+        msg: options.body.userName !== "违法" ? '修改成功' : '昵称违法',
+        userName: options.body.userName
+    }
+})
+
+//验证用户实名认证
+interface UserCardVerify {
+    name: string,
+    cardId: string,
+}
+
+export function userCardVerify(userCardVerify: UserCardVerify) {
+    return http({
+        url: 'user/card/verify',
+        data: userCardVerify
+    })
+}
+
+Mock.mock('user/card/verify', function (options: any) {
+    console.log('认证', options.body)
+    return {
+        code: options.body.name == "认证" ? 200 : 400,
+        msg: options.body.name == "认证" ? '认证成功' : '认证失败',
+        data: options.body
+    }
+})
+
+// 上传图片
+export function imageUpload(imageUrl: string) {
+    return http({
+        url: 'image/upload',
+        data: imageUrl
+    })
+}
+
+Mock.mock('image/upload', function (options: any) {
+    return {
+        code: 200,
+        msg: '上传成功',
+        url: options.body
+    }
 })

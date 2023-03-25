@@ -1,0 +1,67 @@
+<template>
+  <tm-app ref="app">
+    <tm-form @submit="confirm" ref="form" v-model="setPhone" :label-width="190" layout="vertical">
+      <tm-form-item required label="手机号" :rules="[{required:true,message:'请输入手机号'}]" field="phone"
+                    :border="false" showTopErrorGap>
+        <tm-input placeholder="请输入手机号" v-model.lazy="setPhone.phone" :showBottomBotder="false"
+                  prefix="tmicon-mobile-alt"></tm-input>
+      </tm-form-item>
+      <tm-form-item required label="验证码" :rules="[{required:true,message:'请输入验证码'}]" field="code"
+                    :border="false" showTopErrorGap>
+        <tm-input placeholder="请输入验证码" @search="sendCode" v-model.lazy="setPhone.code" :showBottomBotder="false"
+                  prefix="tmicon-ios-finger-print" searchLabel="获取验证码"/>
+      </tm-form-item>
+      <tm-form-item :border="false">
+        <tm-button form-type="submit" label="绑定手机号" block></tm-button>
+      </tm-form-item>
+    </tm-form>
+    <tm-message ref="msg"></tm-message>
+  </tm-app>
+</template>
+<script lang="ts" setup>
+import {useUserInfo} from '@/store/userInfo'
+import {getCurrentInstance, ref} from "vue";
+import {isPhone, toast} from "@/tmui/tool/function/util";
+import {phoneCodeSend, phoneCodeVerify} from "@/api/AppApi";
+
+const proxy = getCurrentInstance()?.proxy ?? null;
+const store = useUserInfo()
+const setPhone = ref({
+  phone: null,
+  code: null
+})
+
+
+function sendCode() {
+  if (setPhone.value.phone) {
+    if (!isPhone(setPhone.value.phone as number)) {
+      toast('请输入正确的手机号')
+    } else {
+      phoneCodeSend(setPhone.value.phone).then(function (res: any) {
+        toast(res.data.msg)
+      })
+    }
+  } else {
+    toast('请输入手机号')
+  }
+}
+
+
+const confirm = (e: any) => {
+  if (e.validate) {
+    phoneCodeVerify(e.data).then((res: any) => {
+      proxy.$refs.msg.show({model: res.data.code == 200 ? 'success' : 'error', text: res.data.msg})
+      if (res.data.code == 200) {
+        store.setUserPhone(res.data.phone)
+        setTimeout(() => {
+          console.log('延迟执行')
+          uni.navigateBack()
+        }, 1300);
+      }
+    })
+  }
+}
+</script>
+
+<style>
+</style>

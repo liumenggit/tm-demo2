@@ -1,0 +1,52 @@
+<template>
+  <tm-app ref="app">
+    <tm-form @submit="confirm" ref="form" v-model="cardInfo" :label-width="190" layout="vertical">
+      <tm-form-item required label="姓名" :rules="[{required:true,message:'请输入姓名'}]" field="name"
+                    :border="false" showTopErrorGap>
+        <tm-input placeholder="请输入姓名" v-model.lazy="cardInfo.name" :showBottomBotder="false"
+                  prefix="tmicon-safety-certificate"/>
+      </tm-form-item>
+      <tm-form-item required label="身份证号" :rules="[{required:true,message:'请输入身份证号'}]" field="cardId"
+                    :border="false" showTopErrorGap>
+        <tm-input placeholder="请输入身份证号" v-model.lazy="cardInfo.cardId" :showBottomBotder="false"
+                  prefix="tmicon-safety-certificate"></tm-input>
+      </tm-form-item>
+      <tm-form-item :border="false">
+        <tm-button form-type="submit" label="认证身份信息" block></tm-button>
+      </tm-form-item>
+    </tm-form>
+    <tm-message ref="msg"></tm-message>
+  </tm-app>
+</template>
+<script lang="ts" setup>
+import {useUserInfo} from '@/store/userInfo'
+import {getCurrentInstance, ref} from "vue";
+import {isPhone, toast} from "@/tmui/tool/function/util";
+import {userCardVerify} from "@/api/AppApi";
+
+const proxy = getCurrentInstance()?.proxy ?? null;
+const store = useUserInfo()
+const cardInfo = ref({
+  name: store.userInfos.auth.card.name,
+  cardId: store.userInfos.auth.card.cardId
+})
+
+
+const confirm = (e: any) => {
+  if (e.validate) {
+    userCardVerify(e.data).then((res: any) => {
+      proxy.$refs.msg.show({model: res.data.code == 200 ? 'success' : 'error', text: res.data.msg})
+      if (res.data.code == 200) {
+        store.setUserAuthCard(res.data.data)
+        setTimeout(() => {
+          console.log('延迟执行')
+          uni.navigateBack()
+        }, 1300);
+      }
+    })
+  }
+}
+</script>
+
+<style>
+</style>

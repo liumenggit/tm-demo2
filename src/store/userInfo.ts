@@ -5,10 +5,17 @@ export const useUserInfo = defineStore('userInfo', {
     state: (): UserInfosStates => ({
         userInfos: uni.getStorageSync('userInfo') || {
             userName: '',
+            phone: '',
             time: '',
             roles: [],
             authBtnList: [],
-            avatar: ''
+            avatar: '',
+            auth: {
+                card: {
+                    name: '',
+                    cardId: ''
+                }
+            }
         },
         token: uni.getStorageSync('token'),
     }),
@@ -25,6 +32,14 @@ export const useUserInfo = defineStore('userInfo', {
         },
         async setUserName(userName: string) {
             this.userInfos.userName = userName
+            uni.setStorageSync('userInfo', this.userInfos)
+        },
+        async setUserPhone(phone: string) {
+            this.userInfos.phone = phone
+            uni.setStorageSync('userInfo', this.userInfos)
+        },
+        async setUserAuthCard(card: any) {
+            this.userInfos.auth.card = card
             uni.setStorageSync('userInfo', this.userInfos)
         },
         async setToken(token: string) {

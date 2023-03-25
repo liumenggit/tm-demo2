@@ -4,6 +4,12 @@ export interface ILogin {
     phone: string
     roles: Array<string>
     authBtnList: Array<string>
+    auth: {
+        card: {
+            name: string,
+            cardId: string
+        }
+    }
 }
 
 export interface ILoginParams {

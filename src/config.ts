@@ -31,7 +31,7 @@ export const config = {
         mockURL: '',
         //需要授权的页面
         auth: [
-            // 'pages/my/my'
+            'pages/my/my'
         ],
         login: '/pages/my/login'
     }

@@ -1,0 +1,46 @@
+<template>
+  <tm-app ref="app">
+    <tm-form @submit="confirm" ref="form" v-model="userNameInfo" :label-width="190" layout="vertical">
+      <tm-form-item required label="昵称" :rules="[{required:true,message:'请输入昵称'}]" field="userName"
+                    :border="false" showTopErrorGap>
+        <tm-input placeholder="请输入昵称" v-model.lazy="userNameInfo.userName" type="nickname"
+                  :showBottomBotder="false"
+                  prefix="tmicon-mobile-alt"></tm-input>
+      </tm-form-item>
+      <tm-form-item :border="false">
+        <tm-button form-type="submit" label="修改昵称" block></tm-button>
+      </tm-form-item>
+    </tm-form>
+    <tm-message ref="msg"></tm-message>
+  </tm-app>
+</template>
+<script lang="ts" setup>
+import {useUserInfo} from '@/store/userInfo'
+import {getCurrentInstance, ref} from "vue";
+import {userSetNickName} from "@/api/AppApi";
+
+const proxy = getCurrentInstance()?.proxy ?? null;
+const store = useUserInfo()
+const userNameInfo = ref({
+  userName: store.userInfos.userName,
+})
+
+
+const confirm = (e: any) => {
+  if (e.validate) {
+    userSetNickName(e.data.userName).then((res: any) => {
+      proxy.$refs.msg.show({model: res.data.code == 200 ? 'success' : 'error', text: res.data.msg})
+      if (res.data.code == 200) {
+        store.setUserName(res.data.userName)
+        userNameInfo.value.userName = res.data.userName
+        setTimeout(() => {
+          uni.navigateBack()
+        }, 1300);
+      }
+    })
+  }
+}
+</script>
+
+<style>
+</style>

@@ -88,6 +88,38 @@
         "titlePenetrate": "YES",
         "transparentTitle": "always"
       }
+    },
+    {
+      "path": "pages/my/set/phone",
+      "style": {
+        "navigationBarTitleText": "设置手机号",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/my/set/nickname",
+      "style": {
+        "navigationBarTitleText": "昵称",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/my/set/avatar",
+      "style": {
+        "navigationBarTitleText": "头像",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
+    },
+    {
+      "path": "pages/my/set/card",
+      "style": {
+        "navigationBarTitleText": "实名认证",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
     }
   ],
   "globalStyle": {
