@@ -33,8 +33,9 @@
         ></tm-text
       ></slot>
     </view>
-    <tm-divider></tm-divider>
-    <view class="pb-24 flex wrap">
+<!--    <tm-divider></tm-divider>-->
+<!--    <view class="pb-24 flex wrap">-->
+    <view class="flex wrap">
       <slot name="content"><tm-text :font-size="26" _class="wrap" :label="props.content"></tm-text></slot>
     </view>
     <view class="flex pb-16">

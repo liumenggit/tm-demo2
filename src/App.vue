@@ -4,7 +4,7 @@
 console.log('env', process.env.NODE_ENV)
 </script>
 <style>
-
+@import './static/icon/iconfont-weapp-icon.css';
 /* #ifdef APP-PLUS-NVUE */
 @import './tmui/scss/nvue.css';
 

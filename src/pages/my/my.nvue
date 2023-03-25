@@ -6,29 +6,23 @@
       </template>
     </tm-navbar>
     <tm-sheet blur :round="3" transprent :margin="[0,0]" :padding="[0,0,0,20]">
-      <!--      <view class="flex-row-bottom-center">-->
-      <!--        <tm-tag text :shadow="0" icon="tmicon-weixinzhifu" color="grey-4" size="s" label="会员码"></tm-tag>-->
-      <!--      </view>-->
+
       <tm-cell url="/pages/my/revise" showAvatar :avatar="store.userInfos.avatar" :round="3" :avatarSize="80"
-               :title="store.userInfos.userName" :label="store.userInfos.phone">
+               :label="store.userInfos.phone">
+        <template v-slot:title>
+          <view class="flex-row flex-row-center-start nowrap">
+            <tm-text :label="store.userInfos.userName"></tm-text>
+            <tm-tag :label="store.userInfos.auth.card?.cardId?'已实名':'未实名'" text :shadow="0"
+                    icon="tmicon-weixinzhifu" color="grey-4" size="s"></tm-tag>
+          </view>
+        </template>
       </tm-cell>
     </tm-sheet>
-    <!--    <tm-cell showAvatar avatar="https://picsum.photos/200" :round="3" :titleFontSize="24"-->
-    <!--             title="VIP会员" rightText="免费领取7天会员"-->
-    <!--             :padding="[12,12]" :linearColor="['#FBDBBD','#FABF87']" linear="left"/>-->
-    <view class="mx-32 round-3 overflow">
-      <tm-cell :round="3" :margin="[0, 0,0,16]" :titleFontSize="30" title="头像 Avatar"/>
-      <tm-cell :round="3" :margin="[0, 0,0,16]" rightText="简单组件简单组件" :titleFontSize="30"
-               title="徽标 Badge"></tm-cell>
-      <tm-cell :round="3" :margin="[0, 0,0,16]" rightColor="red" rightText="2个" :titleFontSize="30"
-               title="卡片 Card"></tm-cell>
-
-    </view>
-    <tm-card status="2022-5-2" title="卡片标题" :round="3">
+    <tm-card status="全部订单" title="我的订单" :round="3" statusColor="grey">
       <template v-slot:content>
         <tm-grid :width="638" :col="4">
           <tm-grid-item :height="120" dot>
-            <tm-icon name="tmicon-user-fill" :font-size="42"></tm-icon>
+            <tm-icon name="t-icon t-icon-yinle" :font-size="42"></tm-icon>
             <tm-text _class="pt-10" :font-size="22" label="宫格文本"></tm-text>
           </tm-grid-item>
           <tm-grid-item color="orange" :height="120" count="积分">
@@ -46,6 +40,20 @@
         </tm-grid>
       </template>
     </tm-card>
+    <tm-card title="我的服务" :round="3" statusColor="grey">
+      <template v-slot:content>
+        <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
+                 :titleFontSize="30" showAvatar bottomBorder/>
+        <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
+                 :titleFontSize="30" showAvatar bottomBorder/>
+        <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
+                 :titleFontSize="30" showAvatar/>
+      </template>
+    </tm-card>
+    <view class="mx-32 round-3 overflow">
+
+
+    </view>
   </tm-app>
 </template>
 <script lang="ts" setup>
