@@ -31,7 +31,9 @@
         <tm-avatar icon="tmicon-QQ" :size="70" round="25" color="white" class="pl-20"></tm-avatar>
       </view>
       <view class="flex-row flex-row-center-start">
-        <tm-checkbox v-model="policy" :round="10" :size="32" label="我已经阅读并同意" style="margin-left: -10rpx"/>
+        <tm-popover label="请阅读隐私协议" position="tl" color="primary" text>
+          <tm-checkbox v-model="policy" :round="10" :size="32" label="我已经阅读并同意" style="margin-left: -10rpx"/>
+        </tm-popover>
         <tm-text label="《用户隐私政策》" color="orange" @click="showWin = true"></tm-text>
       </view>
     </tm-sheet>
