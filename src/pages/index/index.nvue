@@ -40,11 +40,11 @@
                 v-model="str" @search='search' :searchLabel="language('index.search.btntext')"
                 class="guide2"></tm-input>
     </tm-sheet>
-    <tm-tabs swiper @change="tabschange" showTabsLineAni :item-width="110" :width="750" :height="1150"
-             :default-name="tabsIndex" :activeFontSize="32">
-      <tm-tabs-pane name="commend" title="推荐" icon="tmicon-ios-umbrella">
+    <tm-tabs swiper @change="tabschange" showTabsLineAni :item-width="110" :width="750" :height="paneHeight"
+             :default-name="tabsIndex" :activeFontSize="32" class="ceshi" id="222">
+      <tm-tabs-pane name="commend" title="推荐" icon="tmicon-ios-umbrella" >
         <tm-xima :lazy="tabsIndex === 'commend'" @pull-start="pullStart()" :firstLoad="true" :load="commendGet"
-                 :width="750" :height="1150"
+                 :width="750" :height="paneHeight"
                  :data="commendData">
           <template v-slot:top="{status}">
             <tm-text :label="status"></tm-text>
@@ -85,7 +85,7 @@
       </tm-tabs-pane>
       <tm-tabs-pane name="shop" title="商品" icon="tmicon-ios-leaf">
         <tm-xima :lazy="tabsIndex === 'shop'" :firstLoad="true" :load="shopGet"
-                 :width="750" :height="1150"
+                 :width="750" :height="paneHeight"
                  :data="shopData">
           <template v-slot:default="{data}">
             <tm-carousel autoplay :margin="[16,16]" :round="3" :width="720" :height="280" dotPosition="bottom" model="dot"
@@ -128,12 +128,12 @@ import {
   ref,
   getCurrentInstance,
   nextTick,
-  inject
+  inject, computed
 } from "vue"
 import {
   onShow,
   onLoad,
-  onInit
+  onInit, onReady
 } from "@dcloudio/uni-app";
 import {
   language
@@ -144,6 +144,7 @@ import {
 import tmApp from "@/tmui/components/tm-app/tm-app.vue"
 import tmMessage from "@/tmui/components/tm-message/tm-message.vue"
 import {contentList, indexCommend, indexShop} from "@/api/AppApi";
+import {getWindow, topx, torpx} from "@/tmui/tool/function/util";
 
 const store = useTmpiniaStore();
 const app = ref<InstanceType<typeof tmApp> | null>(null)
@@ -166,7 +167,11 @@ const commendGet = () => {
     })
   })
 }
-
+const paneHeight = ref(0)
+// const paneHeight = computed(() => {
+//   let isv = DayJs(props.start).isValid();
+//   return isv ? DayJs(props.start) : DayJs("1980-1-1");
+// });
 const shopData = ref([])
 const shopGet = () => {
   return new Promise((res, rej) => {
@@ -227,6 +232,13 @@ function tabschange(index: string) {
 }
 
 onLoad(() => {
+
+})
+onReady(()=>{
+  const query = uni.createSelectorQuery().in(proxy);
+  query.select('.ceshi').boundingClientRect((result) => {
+    paneHeight.value = torpx(getWindow().height - result.top)
+  }).exec();
 })
 </script>
 <style>

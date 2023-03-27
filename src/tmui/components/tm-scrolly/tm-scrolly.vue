@@ -199,6 +199,7 @@ watch(
 watch(
   () => props.bottomValue,
   () => {
+    console.log('bottomValue')
     isBootRefresh.value = props.bottomValue;
   }
 );

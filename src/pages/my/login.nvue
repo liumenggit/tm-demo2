@@ -12,7 +12,7 @@
                 prefix="tmicon-user-fill" prefixColor="white" showClear></tm-input>
       <tm-input v-model="passwd" placeholder="输入密码" height="80" round="25" color="rgba(255, 255, 255, 0.5)"
                 prefix="tmicon-lock-fill" prefixColor="white" showClear class="mt-50" password></tm-input>
-      <tm-button @click="login" block label="登录" icon="apple" round="25"></tm-button>
+      <tm-button @click="login" :loading="loading" block label="登录" icon="apple" round="25"></tm-button>
       <tm-row :column="2">
         <tm-col transprent align="start">
           <tm-text label="验证码登录 | 一键登录" color="white"></tm-text>
@@ -56,12 +56,16 @@ const rx = `<div class="content_area" id="content_area">
 const user = ref(null)
 const passwd = ref(null)
 let test = ref(false)
+const loading = ref(false)
 
 function login() {
   if (policy.value) {
+    loading.value = true
     store.useUserInfo().login('code').then((res: any) => {
+      loading.value = false
       uni.navigateBack()
     })
+
   } else {
     toast('请同意隐私政策后登录')
   }

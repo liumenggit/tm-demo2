@@ -2,7 +2,7 @@ import http from "@/utils/fetch"
 import Mock from "better-mock/dist/mock.mp";
 import {PhoneCodeVerify} from "@/models/page";
 
-// Mock.setup({timeout: 200})
+Mock.setup({timeout: 200})
 // create      添加
 // delete      删除
 // update      更新

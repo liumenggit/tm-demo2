@@ -1,42 +1,48 @@
 <template>
   <tm-sheet
-    :color="props.color"
-    :_class="[customClass, 'flex-col']"
-    :_style="[customCSSStyle]"
-    :followTheme="props.followTheme"
-    :dark="props.dark"
-    :round="props.round"
-    :shadow="props.shadow"
-    :outlined="props.outlined"
-    :border="props.border"
-    :borderStyle="props.borderStyle"
-    :borderDirection="props.borderDirection"
-    :text="props.text"
-    :transprent="props.transprent"
-    :linear="props.linear"
-    :linearDeep="props.linearDeep"
-    :width="props.width"
-    :height="props.height"
-    :margin="props.margin"
-    :padding="props.padding"
+      :color="props.color"
+      :_class="[customClass, 'flex-col']"
+      :_style="[customCSSStyle]"
+      :followTheme="props.followTheme"
+      :dark="props.dark"
+      :round="props.round"
+      :shadow="props.shadow"
+      :outlined="props.outlined"
+      :border="props.border"
+      :borderStyle="props.borderStyle"
+      :borderDirection="props.borderDirection"
+      :text="props.text"
+      :transprent="props.transprent"
+      :linear="props.linear"
+      :linearDeep="props.linearDeep"
+      :width="props.width"
+      :height="props.height"
+      :margin="props.margin"
+      :padding="props.padding"
   >
     <view class="flex-row flex flex-between pt-24">
       <slot name="title"
-        ><tm-text :font-size="28" _class="text-weight-b" :label="props.title"></tm-text
-      ></slot>
+      >
+        <tm-text :font-size="28" _class="text-weight-b" :label="props.title"></tm-text
+        >
+      </slot>
       <slot name="status"
-        ><tm-text
-          :followTheme="false"
-          :color="props.statusColor"
-          :font-size="26"
-          :label="props.status"
+      >
+        <tm-text
+            :followTheme="false"
+            :color="props.statusColor"
+            :font-size="26"
+            :label="props.status"
         ></tm-text
-      ></slot>
+        >
+      </slot>
     </view>
-<!--    <tm-divider></tm-divider>-->
-<!--    <view class="pb-24 flex wrap">-->
-    <view class="flex wrap">
-      <slot name="content"><tm-text :font-size="26" _class="wrap" :label="props.content"></tm-text></slot>
+    <tm-divider></tm-divider>
+    <view class="pb-24 flex wrap">
+      <!--      <view class="flex wrap">-->
+      <slot name="content">
+        <tm-text :font-size="26" _class="wrap" :label="props.content"></tm-text>
+      </slot>
     </view>
     <view class="flex pb-16">
       <slot name="action"></slot>
@@ -48,11 +54,12 @@
 /**
  * 卡片
  */
-import { computed, PropType } from "vue";
-import { custom_props, computedClass, computedStyle } from "../../tool/lib/minxs";
+import {computed, PropType} from "vue";
+import {custom_props, computedClass, computedStyle} from "../../tool/lib/minxs";
 import tmSheet from "../tm-sheet/tm-sheet.vue";
 import tmText from "../tm-text/tm-text.vue";
 import tmDivider from "../tm-divider/tm-divider.vue";
+
 const props = defineProps({
   ...custom_props,
   shadow: {
@@ -69,7 +76,7 @@ const props = defineProps({
   },
   margin: {
     type: Array as PropType<Array<number>>,
-    default: () => [32, 0,32,24],
+    default: () => [32, 0, 32, 24],
   },
   padding: {
     type: Array as PropType<Array<number>>,

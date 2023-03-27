@@ -21,7 +21,11 @@
         "navigationBarTitleText": "个人中心",
         "navigationStyle": "custom",
         "titlePenetrate": "YES",
-        "transparentTitle": "always"
+        "transparentTitle": "always",
+        "disableScroll": true,
+        "app-plus": {
+          "bounce": "none"
+        }
       }
     },
     {
@@ -140,7 +144,7 @@
   "tabBar": {
     "color": "#9a9a9a",
     "selectedColor": "#3E7DFE",
-    "borderStyle": "white",
+    "borderStyle": "black",
     "backgroundColor": "white",
     "list": [
       {

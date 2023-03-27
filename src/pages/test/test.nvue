@@ -1,85 +1,37 @@
 <template>
-  <tm-app ref="app" bg-img="https://picsum.photos/750/1448">
-    <tm-sheet :margin="[32,0,32,0]" :padding="[24]" style="padding-top: 10vh">
-      <tm-text :font-size="24" _class="font-weight-b" label="带角标的宫格"></tm-text>
-      <tm-divider></tm-divider>
-      <tm-grid :width="638" :col="4">
-        <tm-grid-item dot class="jintian1">
-          <tm-text label="宫格文本"></tm-text>
-        </tm-grid-item>
-        <tm-grid-item count="HOT" class="jintian2">
-          <tm-text label="宫格文本"></tm-text>
-        </tm-grid-item>
-        <tm-grid-item :count="55">
-          <tm-text label="宫格文本"></tm-text>
-        </tm-grid-item>
-        <tm-grid-item icon="tmicon-gem">
-          <tm-text label="宫格文本"></tm-text>
-        </tm-grid-item>
-      </tm-grid>
-    </tm-sheet>
-    <tm-button label="路由" @click="rou()"></tm-button>
-    <tm-guide ref="easyGuide"></tm-guide>
-    <tm-text :label="useUserInfo.userInfos"></tm-text>
+  <tm-app ref="app">
+    <tm-scrolly @refresh="refreshTop" :modelValue="topFresh" @bottom="refreshBottom" :bottom-value="bottomFresh"
+                label="已最近更新">
+      <tm-text label="触摸区域,体验下拉刷新操作."></tm-text>
+      <view v-for="(item,index) in 10" :key="index" style="height: 40px;" class="px-36">
+        <text>{{ item }}</text>
+      </view>
+    </tm-scrolly>
+    <tm-button @click="refreshTop" label="refreshTop"></tm-button>
+    <tm-button @click="refreshBottom" label="refreshBottom"></tm-button>
   </tm-app>
 </template>
 <script lang="ts" setup>
-import {ref, getCurrentInstance} from "vue"
-import {onShow, onLoad, onInit} from "@dcloudio/uni-app";
-import {routerTo} from "@/tmui/tool/function/util";
-import store from '@/store'
+import {ref} from "vue"
 
-const useUserInfo = store.useUserInfo()
-const proxy = getCurrentInstance()?.proxy ?? null;
-const parentNameId = "tmWaterfallId";
-defineExpose({parentNameId: parentNameId});
+const bottomFresh = ref(false)
+const topFresh = ref(false)
 
-function rou() {
-  // routerTo("/pages/info/info", "navigate")
+function refreshTop() {
+  topFresh.value = true;
+  uni.showLoading({title: '...', mask: true})
+  setTimeout(function () {
+    topFresh.value = false
+    uni.hideLoading()
+  }, 1500);
 }
 
-onLoad(() => {
-
-  // proxy.$refs.easyGuide.startGuide([
-  //   {
-  //     queryClass: '.jintian1',
-  //     style: {
-  //       borderRadius: '10rpx',
-  //       border: '10rpx solid #ffeb3b'
-  //     },
-  //     img: [
-  //       {
-  //         width: 600,
-  //         height: 480,
-  //         left: 15,
-  //         top: 100,
-  //         src: '/static/yundaomeiyuajn.png',
-  //         isNextButton: true,
-  //         clickEvent: () => {
-  //           console.log('clickEvent')
-  //         }
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     queryClass: '.jintian2',
-  //     style: {
-  //       borderRadius: '12px'
-  //     },
-  //     img: [
-  //       {
-  //         width: 600,
-  //         height: 480,
-  //         left: 15,
-  //         top: 100,
-  //         src: '/static/yundaomeiyuajn.png',
-  //         isNextButton: true,
-  //         clickEvent: () => {
-  //           console.log('clickEvent')
-  //         }
-  //       }
-  //     ]
-  //   }
-  // ], 0)
-})
+function refreshBottom() {
+  bottomFresh.value = true;
+  uni.showLoading({title: '...', mask: true})
+  setTimeout(function () {
+    bottomFresh.value = false;
+    uni.hideLoading()
+  }, 1500);
+}
 </script>
