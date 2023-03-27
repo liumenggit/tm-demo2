@@ -8,7 +8,7 @@
           <view :style="{height:sysinfo.sysinfo.statusBarHeight+'px'}"></view>
           <view class="flex flex-row flex-row-center-between py-24 px-16">
             <tm-text label="TMUI 3.0.88"></tm-text>
-            <tm-icon @click="showf=false" color="white" :font-size="32" name="tmicon-times"></tm-icon>
+            <tm-icon @click="showf=false" color="white" :font-size="32" name="tmicon-times" ></tm-icon>
           </view>
           <tm-cell url="/pages/changyong/index" color="primary" :transprent="true" :margin="[10,0]"
                    title="通用组件"></tm-cell>
@@ -22,26 +22,26 @@
       </tm-sheet>
     </template>
 
-    <tm-navbar title="主页" :shadow="0" hide-home>
+    <tm-navbar title="主页" :shadow="0" hide-home color="primary">
       <template v-slot:left>
         <view class="flex flex-center flex-row">
-          <tm-icon @click="showf=true" :color="store.tmStore.dark?'primary':''" _class="px-24" :font-size="32"
+          <tm-icon @click="showf=true" :color="store.tmStore.dark?'yellow':'white'" _class="px-24" :font-size="32"
                    name="tmicon-menu"></tm-icon>
           <navigator url="settheme" class="px-12">
-            <tm-icon :font-size="32" name="tmicon-cog-fill"></tm-icon>
+            <tm-icon :font-size="32" name="tmicon-cog-fill" :color="store.tmStore.dark?'yellow':'white'"></tm-icon>
           </navigator>
-          <tm-icon _class="px-24" @click="onChangeDark" :color="store.tmStore.dark?'yellow':''"
+          <tm-icon _class="px-24" @click="onChangeDark" :color="store.tmStore.dark?'yellow':'white'"
                    :font-size="32" name="tmicon-ios-sunny"></tm-icon>
         </view>
       </template>
     </tm-navbar>
-    <tm-sheet :margin="[0, 0]">
+    <tm-sheet :margin="[0, 0]" color="primary">
       <tm-input :placeholder="language('index.search.tips')" :border="1" showClear prefix="tmicon-search"
                 v-model="str" @search='search' :searchLabel="language('index.search.btntext')"
                 class="guide2"></tm-input>
     </tm-sheet>
     <tm-tabs swiper @change="tabschange" showTabsLineAni :item-width="110" :width="750" :height="1150"
-             :default-name="tabsIndex" :showTabsLine="false" :activeFontSize="32">
+             :default-name="tabsIndex" :activeFontSize="32">
       <tm-tabs-pane name="commend" title="推荐" icon="tmicon-ios-umbrella">
         <tm-xima :lazy="tabsIndex === 'commend'" @pull-start="pullStart()" :firstLoad="true" :load="commendGet"
                  :width="750" :height="1150"

@@ -120,6 +120,15 @@
         "titlePenetrate": "YES",
         "transparentTitle": "always"
       }
+    },
+    {
+      "path": "pages/message/message",
+      "style": {
+        "navigationBarTitleText": "消息",
+        "navigationStyle": "custom",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
     }
   ],
   "globalStyle": {
@@ -141,10 +150,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/test/test",
+        "pagePath": "pages/message/message",
         "iconPath": "static/tabar/compass-of.png",
         "selectedIconPath": "static/tabar/compass-on.png",
-        "text": "测试"
+        "text": "消息"
       },
       {
         "pagePath": "pages/my/my",
@@ -173,8 +182,8 @@
         "query": ""
       },
       {
-        "name": "测试",
-        "path": "pages/test/test",
+        "name": "消息",
+        "path": "pages/message/message",
         "query": ""
       },
       {

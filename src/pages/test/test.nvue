@@ -20,16 +20,16 @@
     </tm-sheet>
     <tm-button label="路由" @click="rou()"></tm-button>
     <tm-guide ref="easyGuide"></tm-guide>
-    <tm-text :label="store.userInfos"></tm-text>
+    <tm-text :label="useUserInfo.userInfos"></tm-text>
   </tm-app>
 </template>
 <script lang="ts" setup>
 import {ref, getCurrentInstance} from "vue"
 import {onShow, onLoad, onInit} from "@dcloudio/uni-app";
 import {routerTo} from "@/tmui/tool/function/util";
-import {useUserInfo} from '@/store/userInfo'
+import store from '@/store'
 
-const store = useUserInfo()
+const useUserInfo = store.useUserInfo()
 const proxy = getCurrentInstance()?.proxy ?? null;
 const parentNameId = "tmWaterfallId";
 defineExpose({parentNameId: parentNameId});

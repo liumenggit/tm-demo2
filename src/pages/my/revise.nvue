@@ -3,19 +3,19 @@
     <view class="mx-32 mt-32 round-3 overflow">
       <tm-cell title="头像" url="/pages/my/set/avatar" :margin="[0, 0]" :titleFontSize="30" bottomBorder>
         <template v-slot:rightText>
-          <tm-avatar :img="store.userInfos.avatar" :size="75" :round="4" class="pr-10"></tm-avatar>
+          <tm-avatar :img="useUserInfo.userInfos.avatar" :size="75" :round="4" class="pr-10"></tm-avatar>
         </template>
       </tm-cell>
-      <tm-cell title="昵称" url="/pages/my/set/nickname" :right-text="store.userInfos.userName" :margin="[0, 0]"
+      <tm-cell title="昵称" url="/pages/my/set/nickname" :right-text="useUserInfo.userInfos.userName" :margin="[0, 0]"
                :titleFontSize="30" bottomBorder/>
-      <tm-cell title="手机号" url="/pages/my/set/phone" :right-text="store.userInfos.phone" :margin="[0, 0]"
+      <tm-cell title="手机号" url="/pages/my/set/phone" :right-text="useUserInfo.userInfos.phone" :margin="[0, 0]"
                :titleFontSize="30"/>
     </view>
     <view class="mx-32 mt-32">
       <tm-cell title="实名认证" url="/pages/my/set/card" showAvatar avatar="https://picsum.photos/200"
                :margin="[0, 0]" :round="3" :titleFontSize="30" class="mt-20">
         <template v-slot:right>
-          <tm-button :label="store.userInfos.auth.card?.cardId?'修改':'认证'" :color="store.userInfos.auth.card?.cardId?'green':'primary'" size="small" :padding="[0,0]"
+          <tm-button :label="useUserInfo.userInfos.auth.card?.cardId?'修改':'认证'" :color="useUserInfo.userInfos.auth.card?.cardId?'green':'primary'" size="small" :padding="[0,0]"
                      :margin="[0,0]"></tm-button>
         </template>
       </tm-cell>
@@ -43,11 +43,11 @@
   </tm-app>
 </template>
 <script lang="ts" setup>
-import {useUserInfo} from '@/store/userInfo'
+import store from '@/store'
 import {getCurrentInstance, ref} from "vue";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
-const store = useUserInfo()
+const useUserInfo = store.useUserInfo()
 const alertContent = ref([
   {
     icon: 'tmicon-alert',

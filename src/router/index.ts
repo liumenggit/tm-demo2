@@ -3,7 +3,7 @@ import {ComponentPublicInstance, nextTick} from "vue"
 // const pinia = createPinia()
 // import {useUserInfo} from "@/store/userInfo"
 // const store = useUserInfo()
-import {useUserInfo} from "@/store/userInfo";
+import store from "@/store";
 import {routerTo} from "@/tmui/tool/function/util";
 //如果想要使用框架的自带工具函数请输入uni.$tm.u.?你的方法
 //网络请示为uni.$tm.fetch.?你的方法
@@ -32,10 +32,10 @@ export const useTmRouterBefore = (arg: beforeRouterOpts): void => {
  * @param opts 页面加载完成后返回的参数
  */
 export const useTmRouterAfter = (arg: beforeRouterOpts): void => {
-    const store = useUserInfo()
+    const useUserInfo = store.useUserInfo()
     console.log('路由访问后执行的函数', arg.path)
-    if (uni.$tm.config.custom?.auth.includes(arg.path) && !store.token) {
-        console.log('需要拦截', !!store.token)
+    if (uni.$tm.config.custom?.auth.includes(arg.path) && !useUserInfo.token) {
+        console.log('需要拦截', !!useUserInfo.token)
         routerTo(uni.$tm.config.custom?.login)
     }
 }

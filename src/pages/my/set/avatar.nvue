@@ -15,27 +15,20 @@
   </tm-app>
 </template>
 <script lang="ts" setup>
-import {useUserInfo} from '@/store/userInfo'
+import store from '@/store'
 import {getCurrentInstance, ref} from "vue";
-import {imageUpload} from "@/api/AppApi";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
-const store = useUserInfo()
-const userAvatar = ref(store.userInfos.avatar)
-// const userAvatar = ref('https://picsum.photos/100/100')
+const useUserInfo = store.useUserInfo()
+const userAvatar = ref(useUserInfo.userInfos.avatar)
 
-// 设置头像
 const setAvatar = (e: any) => {
-  imageUpload(e.detail.avatarUrl).then((res: any) => {
-    proxy.$refs.msg.show({model: res.data.code == 200 ? 'success' : 'error', text: res.data.msg})
-    if (res.data.code == 200) {
-      userAvatar.value = res.data.url
-      store.setUserAvatar(res.data.url)
-    }
-  }).catch(() => {
-    proxy.$refs.msg.show({model: 'error', text: '头像设置错误'})
+  store.useUserInfo().setAvatar(e.detail.avatarUrl).then((res: any) => {
+    userAvatar.value = res.data.url
+    setTimeout(() => {
+      uni.navigateBack()
+    }, 1300);
   })
-
 }
 </script>
 

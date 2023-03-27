@@ -1,9 +1,9 @@
 <template>
   <tm-app ref="app">
-    <tm-form @submit="confirm" ref="form" v-model="userNameInfo" :label-width="190" layout="vertical">
+    <tm-form @submit="confirm" ref="form" v-model="nickNameFrom" :label-width="190" layout="vertical">
       <tm-form-item required label="昵称" :rules="[{required:true,message:'请输入昵称'}]" field="userName"
                     :border="false" showTopErrorGap>
-        <tm-input placeholder="请输入昵称" v-model.lazy="userNameInfo.userName" type="nickname"
+        <tm-input placeholder="请输入昵称" v-model.lazy="nickNameFrom.userName" type="nickname"
                   :showBottomBotder="false"
                   prefix="tmicon-mobile-alt"></tm-input>
       </tm-form-item>
@@ -15,28 +15,23 @@
   </tm-app>
 </template>
 <script lang="ts" setup>
-import {useUserInfo} from '@/store/userInfo'
 import {getCurrentInstance, ref} from "vue";
-import {userSetNickName} from "@/api/AppApi";
+import store from '@/store'
 
 const proxy = getCurrentInstance()?.proxy ?? null;
-const store = useUserInfo()
-const userNameInfo = ref({
-  userName: store.userInfos.userName,
+const useUserInfo = store.useUserInfo()
+const nickNameFrom = ref({
+  userName: useUserInfo.userInfos.userName,
 })
 
 
 const confirm = (e: any) => {
   if (e.validate) {
-    userSetNickName(e.data.userName).then((res: any) => {
-      proxy.$refs.msg.show({model: res.data.code == 200 ? 'success' : 'error', text: res.data.msg})
-      if (res.data.code == 200) {
-        store.setUserName(res.data.userName)
-        userNameInfo.value.userName = res.data.userName
-        setTimeout(() => {
-          uni.navigateBack()
-        }, 1300);
-      }
+    useUserInfo.setName(e.data.userName).then((res: any) => {
+      nickNameFrom.value.userName = res.data.userName
+      setTimeout(() => {
+        uni.navigateBack()
+      }, 1300);
     })
   }
 }

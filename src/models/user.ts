@@ -21,5 +21,6 @@ export interface ILoginParams {
 
 export interface UserInfosStates {
     userInfos: ILogin
-    token: string
+    token: string,
+    refresh_token:string
 }

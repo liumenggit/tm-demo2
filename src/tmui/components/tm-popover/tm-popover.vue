@@ -337,6 +337,10 @@ const props = defineProps({
     type: String,
     default: "提示内容",
   },
+  show:{
+    type:Boolean,
+    default:false
+  }
 });
 const sysinfo = inject(
   "tmuiSysInfo",

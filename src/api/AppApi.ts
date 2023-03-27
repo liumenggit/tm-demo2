@@ -1,9 +1,8 @@
 import http from "@/utils/fetch"
 import Mock from "better-mock/dist/mock.mp";
+import {PhoneCodeVerify} from "@/models/page";
 
 // Mock.setup({timeout: 200})
-
-const mockUrl = uni.$tm.config.custom?.mockUrl
 // create      添加
 // delete      删除
 // update      更新
@@ -51,7 +50,7 @@ export function userLogin(code: string) {
 Mock.mock('user/login', {
     msg: '登录成功',
     code: 200,
-    userInfos: {
+    userInfo: {
         userName: '刘老六',
         phone: '18647012056',
         avatar: 'https://picsum.photos/80/80',
@@ -64,7 +63,8 @@ Mock.mock('user/login', {
             }
         }
     },
-    token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv'
+    token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv',
+    refresh_token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv'
 })
 
 //退出登录
@@ -207,10 +207,6 @@ Mock.mock('phone/code/send', {
 })
 
 // 手机验证码验证
-interface PhoneCodeVerify {
-    phone: number,
-    code: number,
-}
 
 // 验证用户手机号
 export function phoneCodeVerify(verify: PhoneCodeVerify) {
@@ -229,7 +225,7 @@ Mock.mock('phone/code/verify', function (options: any) {
 })
 
 //更新你用户昵称
-export function userSetNickName(userName: string) {
+export function setUserName(userName: string) {
     return http({
         url: 'user/set/nickname',
         data: {
@@ -281,5 +277,21 @@ Mock.mock('image/upload', function (options: any) {
         code: 200,
         msg: '上传成功',
         url: options.body
+    }
+})
+
+//更新token
+export function userTokenRefresh(token: string) {
+    return http({
+        url: 'token/refresh',
+        data: token
+    })
+}
+
+Mock.mock('token/refresh', function (options: any) {
+    return {
+        code: 200,
+        msg: '更新token成功',
+        token: options.body
     }
 })
