@@ -236,7 +236,7 @@ onLoad(() => {
 })
 onReady(()=>{
   const query = uni.createSelectorQuery().in(proxy);
-  query.select('.ceshi').boundingClientRect((result) => {
+  query.select('.ceshi').boundingClientRect((result:any) => {
     paneHeight.value = torpx(getWindow().height - result.top)
   }).exec();
 })
