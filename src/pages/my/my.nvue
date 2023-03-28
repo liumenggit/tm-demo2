@@ -47,9 +47,11 @@
     </tm-card>
     <tm-card title="我的服务" :round="3" statusColor="grey">
       <template v-slot:content>
-        <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
+        <tm-cell title="反馈" url="/pages/my/feedback" avatar="https://picsum.photos/30/30" :margin="[0, 0]"
+                 :padding="[0,24]"
                  :titleFontSize="30" showAvatar bottomBorder/>
-        <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
+        <tm-cell title="预约" url="/pages/my/bespeak/bespeak" avatar="https://picsum.photos/30/30" :margin="[0, 0]"
+                 :padding="[0,24]"
                  :titleFontSize="30" showAvatar bottomBorder/>
         <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
                  :titleFontSize="30" showAvatar/>

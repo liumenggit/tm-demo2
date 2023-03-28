@@ -49,7 +49,6 @@ function sendCode() {
 
 const confirm = (e: any) => {
   if (e.validate) {
-    useUserInfo.set
     useUserInfo.setPhone(e.data).then((res: any) => {
       setTimeout(() => {
         uni.navigateBack()

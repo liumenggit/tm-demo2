@@ -295,3 +295,37 @@ Mock.mock('token/refresh', function (options: any) {
         token: options.body
     }
 })
+
+//预约
+interface bespeak {
+    type: number,
+    date: string
+}
+
+export function userBespeak(data: bespeak) {
+    return http({
+        url: 'user/bespeak',
+        data: data
+    })
+}
+
+Mock.mock('user/bespeak', {
+    code: 200,
+    msg: '更新token成功',
+    'list|10': [{
+        'title|+1': [
+            '08:00-09:00',
+            '09:00-10:00',
+            '10:00-11:00',
+            '11:00-12:00',
+            '12:00-13:00',
+            '13:00-14:00',
+            '14:00-15:00',
+            '15:00-16:00',
+            '16:00-17:00',
+            '17:00-18:00'
+        ],
+        'label|0-100': 1,
+        'status|1': [true,false]
+    }]
+})
