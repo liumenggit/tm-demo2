@@ -5,7 +5,7 @@
                     :border="false" showTopErrorGap>
         <tm-input placeholder="请输入昵称" v-model.lazy="nickNameFrom.userName" type="nickname"
                   :showBottomBotder="false"
-                  prefix="tmicon-mobile-alt"></tm-input>
+                  prefix="td-user"></tm-input>
       </tm-form-item>
       <tm-form-item :border="false">
         <tm-button form-type="submit" label="修改昵称" block></tm-button>

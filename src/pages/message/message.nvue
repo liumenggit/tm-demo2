@@ -4,7 +4,7 @@
       <template v-slot:default>
         <view class="flex-row flex-row-center-center">
           <tm-text label="消息(11)" color="white" font-size="30"></tm-text>
-          <tm-icon name="tmicon-delete" font-size="24" color="white" class="pl-20"></tm-icon>
+          <tm-icon name="td-trash" font-size="36" color="white" class="pl-20"></tm-icon>
         </view>
       </template>
     </tm-navbar>

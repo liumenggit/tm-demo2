@@ -8,7 +8,7 @@
           <view :style="{height:sysinfo.sysinfo.statusBarHeight+'px'}"></view>
           <view class="flex flex-row flex-row-center-between py-24 px-16">
             <tm-text label="TMUI 3.0.88"></tm-text>
-            <tm-icon @click="showf=false" color="white" :font-size="32" name="tmicon-times" ></tm-icon>
+            <tm-icon @click="showf=false" color="white" :font-size="32" name="tmicon-times"></tm-icon>
           </view>
           <tm-cell url="/pages/changyong/index" color="primary" :transprent="true" :margin="[10,0]"
                    title="通用组件"></tm-cell>
@@ -42,7 +42,7 @@
     </tm-sheet>
     <tm-tabs swiper @change="tabschange" showTabsLineAni :item-width="110" :width="750" :height="paneHeight"
              :default-name="tabsIndex" :activeFontSize="32" class="ceshi" id="222">
-      <tm-tabs-pane name="commend" title="推荐" icon="tmicon-ios-umbrella" >
+      <tm-tabs-pane name="commend" title="推荐" icon="td-fire-fill">
         <tm-xima :lazy="tabsIndex === 'commend'" @pull-start="pullStart()" :firstLoad="true" :load="commendGet"
                  :width="750" :height="paneHeight"
                  :data="commendData">
@@ -54,13 +54,15 @@
                          :margin="[16,16]"
                          :list="data.carousel"></tm-carousel>
             <tm-grid :col="5">
-              <tm-grid-item v-for="item in data.grid" :height="0" :url="item.url" :class="'grid' + item.title">
-                <tm-avatar :img="item.image" :font-size="80" :round="26"></tm-avatar>
-                <tm-text :label="'返送的'+ item.title" color="grey"></tm-text>
+              <tm-grid-item v-for="(gridItem,gridIndex) in data.grid" :key="gridIndex" :height="0" :url="gridItem.url"
+                            :class="'grid' + gridItem.title">
+                <tm-avatar :img="gridItem.image" :font-size="80" :round="26"></tm-avatar>
+                <tm-text :label="'返送的'+ gridItem.title" color="grey"></tm-text>
               </tm-grid-item>
             </tm-grid>
             <tm-roll-notice @click="guide" :list="data.notice" :margin="[24,24,24,0]"/>
-            <tm-coupon v-for="(couponItem,couponIndex) in data.list" :rightDetail="couponItem.rightDetail"
+            <tm-coupon v-for="(couponItem,couponIndex) in data.list" :key="couponIndex"
+                       :rightDetail="couponItem.rightDetail"
                        :margin="[0,0]">
               <template v-slot:thumb>
                 <tm-image :src="couponItem.thumb" :width="120" :height="120" :round="4">
@@ -83,12 +85,13 @@
           </template>
         </tm-xima>
       </tm-tabs-pane>
-      <tm-tabs-pane name="shop" title="商品" icon="tmicon-ios-leaf">
+      <tm-tabs-pane name="shop" title="商品" icon="td-shopping-fill">
         <tm-xima :lazy="tabsIndex === 'shop'" :firstLoad="true" :load="shopGet"
                  :width="750" :height="paneHeight"
                  :data="shopData">
           <template v-slot:default="{data}">
-            <tm-carousel autoplay :margin="[16,16]" :round="3" :width="720" :height="280" dotPosition="bottom" model="dot"
+            <tm-carousel autoplay :margin="[16,16]" :round="3" :width="720" :height="280" dotPosition="bottom"
+                         model="dot"
                          :list="data.carousel"/>
             <tm-cell showAvatar avatar="https://picsum.photos/200" :round="3" :titleFontSize="24"
                      title="完善会员信息为您推荐合适您的"
@@ -97,7 +100,7 @@
             <tm-card :margin="[0,0]" status="查看全部" title="热播新品，用故事点亮成长指挥">
               <template v-slot:content>
                 <tm-grid :col="3" :width="710">
-                  <tm-grid-item :height="0" v-for="item in 6">
+                  <tm-grid-item :height="0" v-for="(gridItem,gridIndex) in 6" :key="gridIndex">
                     <tm-image src="https://picsum.photos/120/120" :round="6" class="mb-10"/>
                     <tm-text label="热播新品用故事点亮成长指挥" :font-size="24"></tm-text>
                   </tm-grid-item>
@@ -107,7 +110,7 @@
             <tm-card :margin="[0,0]" status="查看全部" title="热播新品，用故事点亮成长指挥">
               <template v-slot:content>
                 <tm-grid :col="3" :width="710">
-                  <tm-grid-item :height="0" v-for="item in 6">
+                  <tm-grid-item :height="0" v-for="(gridItem,gridIndex) in 6" :key="gridIndex">
                     <tm-image src="https://picsum.photos/120/120" :round="6" class="mb-10"/>
                     <tm-text label="热播新品用故事点亮成长指挥" :font-size="24"></tm-text>
                   </tm-grid-item>
@@ -234,9 +237,9 @@ function tabschange(index: string) {
 onLoad(() => {
 
 })
-onReady(()=>{
+onReady(() => {
   const query = uni.createSelectorQuery().in(proxy);
-  query.select('.ceshi').boundingClientRect((result:any) => {
+  query.select('.ceshi').boundingClientRect((result: any) => {
     paneHeight.value = torpx(getWindow().height - result.top)
   }).exec();
 })

@@ -9,9 +9,9 @@
       <tm-text label="TMUI3.0" font-size="40"></tm-text>
       <tm-text label="欢迎您登录，使用TMUI3.0登录模板" parent-class="my-20"></tm-text>
       <tm-input v-model="user" placeholder="输入用户名" height="80" round="25" color="rgba(255, 255, 255, 0.5)"
-                prefix="tmicon-user-fill" prefixColor="white" showClear></tm-input>
+                prefix="td-user" prefixColor="white" showClear></tm-input>
       <tm-input v-model="passwd" placeholder="输入密码" height="80" round="25" color="rgba(255, 255, 255, 0.5)"
-                prefix="tmicon-lock-fill" prefixColor="white" showClear class="mt-50" password></tm-input>
+                prefix="td-lock" prefixColor="white" showClear class="mt-50" password></tm-input>
       <tm-button @click="login" :loading="loading" block label="登录" icon="apple" round="25"></tm-button>
       <tm-row :column="2">
         <tm-col transprent align="start">
@@ -25,10 +25,8 @@
     <tm-sheet transprent class="fixed b-10 fulled">
       <tm-text label="其他方式登录" color="white"></tm-text>
       <view class="flex-row flex-item-top-start py-30">
-        <tm-avatar icon="tmicon-QQ" :size="70" round="25" color="white"></tm-avatar>
-        <tm-avatar icon="tmicon-QQ" :size="70" round="25" color="white" class="pl-20"></tm-avatar>
-        <tm-avatar icon="tmicon-QQ" :size="70" round="25" color="white" class="pl-20"></tm-avatar>
-        <tm-avatar icon="tmicon-QQ" :size="70" round="25" color="white" class="pl-20"></tm-avatar>
+        <tm-icon customicon name="td-QQ-circle-fill" :font-size="70"></tm-icon>
+        <tm-icon customicon name="td-weibo-circle-fill" :font-size="70"></tm-icon>
       </view>
       <view class="flex-row flex-row-center-start">
         <tm-popover :show="test" label="请阅读隐私协议" position="tl" color="primary" text>

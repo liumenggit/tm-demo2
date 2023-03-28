@@ -102,7 +102,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx4de795641e445f22",
+        "appid" : "wx50693dd0b5cb3b6d",
         // "lazyCodeLoading": "requiredComponents",
         // "renderer":"skyline",
         "setting" : {

@@ -15,11 +15,11 @@
           <view class="flex-row flex-row-center-start nowrap">
             <tm-text :label="useUserInfo.userInfos.userName"></tm-text>
             <tm-tag :label="useUserInfo.userInfos.auth.card?.cardId?'已实名':'未实名'" text :shadow="0"
-                    icon="tmicon-weixinzhifu" color="grey-4" size="s"></tm-tag>
+                    icon="td-safetycertificate-f" color="grey-4" size="xs"></tm-tag>
           </view>
         </template>
         <template v-slot:right>
-          <tm-icon name="tmicon-angle-right" color="white" font-size="18"></tm-icon>
+          <tm-icon name="td-color_palette" color="white" font-size="36"></tm-icon>
         </template>
       </tm-cell>
     </tm-sheet>
@@ -27,39 +27,49 @@
       <template v-slot:content>
         <tm-grid :width="638" :col="4">
           <tm-grid-item :height="120" dot>
-            <tm-icon name="t-icon t-icon-yinle" :font-size="42"></tm-icon>
-            <tm-text _class="pt-10" :font-size="22" label="宫格文本"></tm-text>
+            <tm-icon name="td-archive" :font-size="60"></tm-icon>
+            <tm-text _class="pt-10" :font-size="22" label="代付款"></tm-text>
           </tm-grid-item>
-          <tm-grid-item color="orange" :height="120" count="积分">
-            <tm-icon name="tmicon-cog-fill" :font-size="42"></tm-icon>
-            <tm-text _class="pt-10" :font-size="22" label="宫格文本"></tm-text>
+          <tm-grid-item color="red" :height="120" :count="1">
+            <tm-icon name="td-box" :font-size="60"></tm-icon>
+            <tm-text _class="pt-10" :font-size="22" label="待收货"></tm-text>
           </tm-grid-item>
-          <tm-grid-item color="green" :height="120" :count="55">
-            <tm-icon name="tmicon-heart-fill" :font-size="42"></tm-icon>
-            <tm-text :font-size="22" label="宫格文本"></tm-text>
+          <tm-grid-item :height="120" dot>
+            <tm-icon name="td-clipboard" :font-size="60"></tm-icon>
+            <tm-text _class="pt-10" :font-size="22" label="待评价"></tm-text>
           </tm-grid-item>
-          <tm-grid-item color="pink" :height="120" icon="tmicon-gem">
-            <tm-icon name="tmicon-layergroup-fill" :font-size="42"></tm-icon>
-            <tm-text _class="pt-10" :font-size="22" label="宫格文本"></tm-text>
+          <tm-grid-item :height="120">
+            <tm-icon name="td-event_scheduled" :font-size="60"></tm-icon>
+            <tm-text _class="pt-10" :font-size="22" label="预订"></tm-text>
           </tm-grid-item>
         </tm-grid>
       </template>
     </tm-card>
     <tm-card title="我的服务" :round="3" statusColor="grey">
       <template v-slot:content>
-        <tm-cell title="反馈" url="/pages/my/feedback" avatar="https://picsum.photos/30/30" :margin="[0, 0]"
+        <tm-cell title="反馈" url="/pages/my/feedback" :margin="[0, 0]"
                  :padding="[0,24]"
-                 :titleFontSize="30" showAvatar bottomBorder/>
-        <tm-cell title="预约" url="/pages/my/bespeak/bespeak" avatar="https://picsum.photos/30/30" :margin="[0, 0]"
+                 :titleFontSize="30" showAvatar bottomBorder>
+          <template v-slot:avatar>
+            <tm-icon  name="td-bug" :font-size="50"></tm-icon>
+          </template>
+        </tm-cell>
+        <tm-cell title="预约" url="/pages/my/bespeak/bespeak" :margin="[0, 0]"
                  :padding="[0,24]"
-                 :titleFontSize="30" showAvatar bottomBorder/>
-        <tm-cell title="收货地址" avatar="https://picsum.photos/30/30" :margin="[0, 0]" :padding="[0,24]"
-                 :titleFontSize="30" showAvatar/>
+                 :titleFontSize="30" showAvatar bottomBorder>
+          <template v-slot:avatar>
+            <tm-icon  name="td-event_scheduled" :font-size="50"></tm-icon>
+          </template>
+        </tm-cell>
+        <tm-cell title="收货地址" :margin="[0, 0]" :padding="[0,24]"
+                 :titleFontSize="30" showAvatar>
+          <template v-slot:avatar>
+            <tm-icon  name="td-map" :font-size="50"></tm-icon>
+          </template>
+        </tm-cell>
       </template>
     </tm-card>
     <view class="mx-32 round-3 overflow">
-
-
     </view>
   </tm-app>
 </template>
@@ -67,15 +77,13 @@
 import {
   onShow,
   onLoad,
-  onInit
 } from "@dcloudio/uni-app";
 import store from '@/store'
 
 const useUserInfo = store.useUserInfo()
 onLoad(() => {
-  console.log('onload')
 })
 onShow(() => {
-  console.log('onshow')
 })
+
 </script>

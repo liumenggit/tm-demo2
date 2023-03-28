@@ -4,12 +4,12 @@
       <tm-form-item required label="姓名" :rules="[{required:true,message:'请输入姓名'}]" field="name"
                     :border="false" showTopErrorGap>
         <tm-input placeholder="请输入姓名" v-model.lazy="cardForm.name" :showBottomBotder="false"
-                  prefix="tmicon-safety-certificate"/>
+                  prefix="td-user"/>
       </tm-form-item>
       <tm-form-item required label="身份证号" :rules="[{required:true,message:'请输入身份证号'}]" field="cardId"
                     :border="false" showTopErrorGap>
         <tm-input placeholder="请输入身份证号" v-model.lazy="cardForm.cardId" :showBottomBotder="false"
-                  prefix="tmicon-safety-certificate"></tm-input>
+                  prefix="td-idcard"></tm-input>
       </tm-form-item>
       <tm-form-item :border="false">
         <tm-button form-type="submit" label="认证身份信息" block></tm-button>

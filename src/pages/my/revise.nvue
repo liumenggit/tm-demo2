@@ -12,21 +12,30 @@
                :titleFontSize="30"/>
     </view>
     <view class="mx-32 mt-32">
-      <tm-cell title="实名认证" url="/pages/my/set/card" showAvatar avatar="https://picsum.photos/200"
+      <tm-cell title="实名认证" url="/pages/my/set/card" showAvatar
                :margin="[0, 0]" :round="3" :titleFontSize="30" class="mt-20">
+        <template v-slot:avatar>
+          <tm-icon customicon name="td-shield_check" :font-size="60"></tm-icon>
+        </template>
         <template v-slot:right>
           <tm-button :label="useUserInfo.userInfos.auth.card?.cardId?'修改':'认证'" :color="useUserInfo.userInfos.auth.card?.cardId?'green':'primary'" size="small" :padding="[0,0]"
                      :margin="[0,0]"></tm-button>
         </template>
       </tm-cell>
-      <tm-cell title="微信" showAvatar avatar="https://picsum.photos/200"
+      <tm-cell title="微信" showAvatar
                :margin="[0, 0]" :round="3" :titleFontSize="30" class="mt-20">
+        <template v-slot:avatar>
+          <tm-icon customicon name="td-shield_check" :font-size="60"></tm-icon>
+        </template>
         <template v-slot:right>
           <tm-button label="绑定" size="small" :padding="[0,0]" :margin="[0,0]"></tm-button>
         </template>
       </tm-cell>
-      <tm-cell title="QQ" showAvatar avatar="https://picsum.photos/200"
+      <tm-cell title="QQ" showAvatar
                :margin="[0, 0]" :round="3" :titleFontSize="30" class="mt-20">
+        <template v-slot:avatar>
+          <tm-icon customicon name="td-shield_check" :font-size="60"></tm-icon>
+        </template>
         <template v-slot:right>
           <tm-button label="绑定" size="small" :padding="[0,0]" :margin="[0,0]"></tm-button>
         </template>
