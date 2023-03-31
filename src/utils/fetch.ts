@@ -12,8 +12,8 @@ async function http(cog: fetchConfig) {
         // console.log('请求前', cog)
         if (cog) cog.url = uni.$tm.config.custom?.baseURL + cog.url
         return cog || {}
-    }, async (result: fetchConfigSuccessType): Promise<fetchConfigSuccessType> => {
-        return Promise.reject(result)
+    }, async (result: fetchConfigSuccessType)=> {
+        return result
         // console.log('请求成功', result)
     }, async (result: fetchConfigSuccessType) => {
         // console.log('complete', result)
@@ -24,6 +24,7 @@ async function http(cog: fetchConfig) {
                     title: String(result.statusCode)
                 })
         }
+        return result
         // return Promise.reject(result)
     })
 }
