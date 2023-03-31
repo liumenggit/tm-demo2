@@ -146,8 +146,9 @@ import {
 } from '@/tmui/tool/lib/tmpinia';
 import tmApp from "@/tmui/components/tm-app/tm-app.vue"
 import tmMessage from "@/tmui/components/tm-message/tm-message.vue"
-import {contentList, indexCommend, indexShop} from "@/api/AppApi";
+import {contentList, fetchConfigSuccessType, indexCommend, indexShop} from "@/api/AppApi";
 import {getWindow, topx, torpx} from "@/tmui/tool/function/util";
+import {loginte, logintest} from "@/api";
 
 const store = useTmpiniaStore();
 const app = ref<InstanceType<typeof tmApp> | null>(null)
@@ -161,7 +162,8 @@ const tabsIndex = ref('commend')
 const commendData = ref([])
 const commendGet = () => {
   return new Promise((res, rej) => {
-    indexCommend().then(function (resu: any) {
+    indexCommend().then(function (resu:any) {
+      console.log('indexCommend',resu)
       commendData.value = resu.data
       res(true)
       // setTimeout(guide, 1000);
@@ -235,8 +237,12 @@ function tabschange(index: string) {
 }
 
 onLoad(() => {
-
+  console.log('onLoad')
+  loginte({username:'123123',password:'123123123'}).then((res)=>{
+    console.log(res)
+  })
 })
+
 onReady(() => {
   const query = uni.createSelectorQuery().in(proxy);
   query.select('.ceshi').boundingClientRect((result: any) => {

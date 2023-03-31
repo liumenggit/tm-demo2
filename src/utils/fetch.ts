@@ -1,18 +1,21 @@
 import {fetchConfig, fetchConfigSuccessType, fetchConfigMethod} from "@/tmui/tool/lib/interface";
+import type {Dirent} from "fs";
+// import { fetchNet } from '@/tmui/tool/lib/fetch';
 
 interface custom {
     auth?: boolean,
     loading?: boolean
 }
 
-function http(cog: fetchConfig) {
-    return uni.$tm.fetch.request(cog, function (cog: fetchConfig) {
+async function http(cog: fetchConfig) {
+    return uni.$tm.fetch.request(cog, async (cog: fetchConfig) => {
         // console.log('请求前', cog)
         if (cog) cog.url = uni.$tm.config.custom?.baseURL + cog.url
         return cog || {}
-    }, function (result: fetchConfigSuccessType) {
+    }, async (result: fetchConfigSuccessType): Promise<fetchConfigSuccessType> => {
+        return Promise.reject(result)
         // console.log('请求成功', result)
-    }, function (result: fetchConfigSuccessType) {
+    }, async (result: fetchConfigSuccessType) => {
         // console.log('complete', result)
         switch (result.statusCode) {
             case 404:
@@ -21,6 +24,7 @@ function http(cog: fetchConfig) {
                     title: String(result.statusCode)
                 })
         }
+        // return Promise.reject(result)
     })
 }
 

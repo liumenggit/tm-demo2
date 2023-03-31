@@ -124,7 +124,38 @@ Mock.mock('/list', {
 })
 
 //推荐
+export interface ApiResultOf<T> {
+    error: number
+    message?: string
+    result?: T
+}
+
+interface EntityResult<T> {
+    entity: T
+}
+
+export type ApiResult = ApiResultOf<any>
+
+export type ApiResultOfEntity<T> = ApiResultOf<EntityResult<T>>
+
+
+declare interface LoginParams {
+    username: string;
+    password: string;
+}
+declare interface LoginModel {
+    token: string;
+    type?: string
+    expiration?: string
+}
+export interface fetchConfigSuccessType{
+    data:object|string|ArrayBuffer,
+    statusCode:number,
+    header:object,
+    cookies:Array<string>
+}
 export function indexCommend() {
+    // @ts-ignore
     return http({
         url: 'index/commend',
         method: "GET"
