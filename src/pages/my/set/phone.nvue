@@ -22,7 +22,7 @@
 import store from '@/store'
 import {getCurrentInstance, ref} from "vue";
 import {isPhone, toast} from "@/tmui/tool/function/util";
-import {phoneCodeSend} from "@/services/api/AppApi";
+import {phoneCodeSend} from "@/services/api/user/phone";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
 const useUserInfo = store.useUserInfo()
@@ -37,7 +37,7 @@ function sendCode() {
     if (!isPhone(phoneFrom.value.phone as number)) {
       toast('请输入正确的手机号')
     } else {
-      phoneCodeSend(phoneFrom.value.phone).then(function (res: any) {
+      phoneCodeSend(phoneFrom.value.phone).then(function (res) {
         toast(res.data.msg)
       })
     }

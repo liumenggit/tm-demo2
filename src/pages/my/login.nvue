@@ -59,7 +59,8 @@ const loading = ref(false)
 function login() {
   if (policy.value) {
     loading.value = true
-    store.useUserInfo().login('code').then((res: any) => {
+    store.useUserInfo().login('code').then((res) => {
+      console.log(res.data.userInfos.userName)
       loading.value = false
       uni.navigateBack()
     })

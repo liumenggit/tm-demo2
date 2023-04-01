@@ -2,12 +2,11 @@ import {defineConfig} from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import tmuiCss from "./src/tmui/tool/vitePlugs/tmuiCss";
-
 import {resolve} from "path"
-// import Components from 'unplugin-vue-components/vite'
 // https://vitejs.dev/config/
 import type {ConfigEnv, UserConfig} from 'vite'
-import { loadEnv } from 'vite'
+import {loadEnv} from 'vite'
+
 export default ({mode}: ConfigEnv): UserConfig => {
     const root = process.cwd()
     const env = loadEnv(mode, root)
@@ -26,11 +25,16 @@ export default ({mode}: ConfigEnv): UserConfig => {
             // 选项写法
             port: env.VITE_PORT as unknown as number,
             proxy: {
-                '/pag': {
-                    target: 'https://cdn.tmui.design',
-                    changeOrigin: true,
-                    rewrite: (path) => path.replace(/^\/api/, '/api')
-                },
+                // '/pag': {
+                //     target: 'https://cdn.tmui.design',
+                //     changeOrigin: true,
+                //     rewrite: (path) => path.replace(/^\/api/, '/api')
+                // },
+                // '/api': {
+                //     target: env.VITE_BASE_URL,
+                //     changeOrigin: true,
+                //     rewrite: path => path.replace(/^\/api/, ''),
+                // },
             }
         },
         plugins: [
@@ -40,29 +44,3 @@ export default ({mode}: ConfigEnv): UserConfig => {
         ],
     }
 }
-// export default defineConfig({
-//     dts: true,
-//     resolve: {
-//         alias: [
-//             {
-//                 find: "@",
-//                 replacement: resolve(__dirname, 'src')
-//             }
-//         ]
-//     },
-//     server: {
-//         // 选项写法
-//         proxy: {
-//             '/pag': {
-//                 target: 'https://cdn.tmui.design',
-//                 changeOrigin: true,
-//                 rewrite: (path) => path.replace(/^\/api/, '/api')
-//             },
-//         }
-//     },
-//     plugins: [
-//         uni(),
-//         vueJsx(),
-//         tmuiCss(),
-//     ],
-// });
