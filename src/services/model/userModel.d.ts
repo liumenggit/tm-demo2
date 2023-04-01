@@ -1,7 +1,7 @@
-export interface ILogin {
+declare interface ILogin {
     userName: string
     avatar: string
-    phone: string
+    phone: number
     roles: Array<string>
     authBtnList: Array<string>
     auth: {
@@ -12,15 +12,12 @@ export interface ILogin {
     }
 }
 
-export interface ILoginParams {
-    page: number
-    pageSize: number
-
-    [keys: string]: any
+declare interface ILoginParams {
+    code: string
 }
 
-export interface UserInfosStates {
+declare interface UserInfosStates {
     userInfos: ILogin
     token: string,
-    refresh_token:string
+    refresh_token: string
 }

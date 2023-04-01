@@ -154,9 +154,8 @@ import {
 } from '@/tmui/tool/lib/tmpinia';
 import tmApp from "@/tmui/components/tm-app/tm-app.vue"
 import tmMessage from "@/tmui/components/tm-message/tm-message.vue"
-import {contentList, fetchConfigSuccessType, indexCommend, indexShop} from "@/api/AppApi";
+import {contentList, fetchConfigSuccessType, indexCommend, indexShop} from "@/services/api/AppApi";
 import {getWindow, topx, torpx} from "@/tmui/tool/function/util";
-import {luchTest} from "@/utils/luch";
 
 const store = useTmpiniaStore();
 const app = ref<InstanceType<typeof tmApp> | null>(null)
@@ -245,11 +244,6 @@ function tabschange(index: string) {
 }
 
 onLoad(() => {
-    luchTest().then((res) => {
-        console.log('luchTest', res.data, res.data.grid[0].image)
-    }).catch((err) => {
-        console.log('err', err)
-    })
 })
 
 onReady(() => {

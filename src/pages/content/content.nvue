@@ -58,7 +58,7 @@ import {
   getCurrentInstance,
   computed
 } from "vue";
-import {contentList} from "@/api/AppApi";
+import {contentList} from "@/services/api/AppApi";
 const cardList = ref([])
 const waterfallImglist = ref([
   {

@@ -63,7 +63,7 @@ import {computed, getCurrentInstance, ref} from "vue";
 import {onLoad, onReady} from "@dcloudio/uni-app";
 import {getWindow, isPhone, toast, torpx} from "@/tmui/tool/function/util";
 import * as dayjs from "@/tmui/tool/dayjs/esm/index"
-import {phoneCodeSend, userBespeak} from "@/api/AppApi";
+import {phoneCodeSend, userBespeak} from "@/services/api/AppApi";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
 const DayJs = dayjs.default;

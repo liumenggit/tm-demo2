@@ -1,5 +1,7 @@
 import Request from 'luch-request/src/lib/luch-request'
+import {getBaseUrl} from '@/utils/env'
 
+const BASE_URL = getBaseUrl()
 const HEADER = {
     'Content-Type': 'application/json;charset=UTF-8;',
     'Accept': 'application/json, text/plain, */*',
@@ -7,8 +9,8 @@ const HEADER = {
 
 function createRequest() {
     return new Request({
-        baseURL: '',
-        // header: HEADER,
+        baseURL: BASE_URL,
+        header: HEADER,
         custom: {
             auth: false,
         },

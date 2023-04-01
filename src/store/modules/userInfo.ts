@@ -1,18 +1,11 @@
 import {defineStore} from 'pinia'
-import {UserInfosStates, ILogin} from '@/models/user'
 import {
     imageUpload,
-    phoneCodeVerify,
     setUserName,
-    userCardVerify, userLogin, userTokenRefresh,
-} from "@/api/AppApi";
-import {PhoneCodeVerify} from "@/models/page";
-import {upload} from "@/models/imageUpload";
-import {fetchConfigSuccessType} from "@/tmui/tool/lib/interface";
-import RequestSuccessCallbackResult = UniNamespace.RequestSuccessCallbackResult;
-import * as http from "http";
-import {promises} from "dns";
-import {Dirent} from "fs";
+    userCardVerify, userTokenRefresh,
+} from "@/services/api/AppApi";
+import {phoneCodeVerify} from "@/services/api/user/phone";
+import {userLogin} from "@/services/api/user/login";
 
 export const useUserInfo = defineStore('userInfo', {
     state: (): UserInfosStates => ({
@@ -39,11 +32,10 @@ export const useUserInfo = defineStore('userInfo', {
         }
     },
     actions: {
-        async login(code: string) {
+        async login(code: ILoginParams) {
             return new Promise((resolve, reject) => {
-                userLogin(code).then((res: any) => {
-                    console.log('login', res)
-                    this.userInfos = res.data.userInfo
+                userLogin(code).then((res) => {
+                    this.userInfos = res.data.userInfos
                     uni.setStorageSync('userInfo', this.userInfos)
                     this.token = res.data.token
                     uni.setStorageSync('token', this.token)
@@ -84,7 +76,7 @@ export const useUserInfo = defineStore('userInfo', {
         },
         async setPhone(phone: PhoneCodeVerify) {
             return new Promise((resolve, reject) => {
-                phoneCodeVerify(phone).then((res: any) => {
+                phoneCodeVerify(phone).then((res) => {
                     this.userInfos.phone = res.data.phone
                     uni.setStorageSync('userInfo', this.userInfos)
                     resolve(res)
