@@ -46,14 +46,6 @@
       }
     },
     {
-      "path": "pages/content/content",
-      "style": {
-        "navigationBarTitleText": "内容",
-        "titlePenetrate": "YES",
-        "transparentTitle": "always"
-      }
-    },
-    {
       "path": "pages/info/info",
       "style": {
         "navigationBarTitleText": "信息展示",

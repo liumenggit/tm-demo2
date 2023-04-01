@@ -1,11 +1,10 @@
 import {defineStore} from 'pinia'
-import {
-    imageUpload,
-    setUserName,
-    userCardVerify, userTokenRefresh,
-} from "@/services/api/AppApi";
 import {phoneCodeVerify} from "@/services/api/user/phone";
 import {userLogin} from "@/services/api/user/login";
+import {imageUpload} from "@/services/api/imageUpload";
+import {setUserName} from "@/services/api/user/nickname";
+import {userCardVerify} from "@/services/api/user/card";
+import {userTokenRefresh} from "@/services/api/user/tokenRefresh";
 
 export const useUserInfo = defineStore('userInfo', {
     state: (): UserInfosStates => ({
@@ -53,8 +52,8 @@ export const useUserInfo = defineStore('userInfo', {
         },
         async setAvatar(avatar: string) {
             return new Promise((resolve, reject) => {
-                imageUpload(avatar).then((res: any) => {
-                    console.log('ur;', res)
+                imageUpload(avatar).then((res) => {
+                    console.log('ur;', res.data.url)
                     this.userInfos.avatar = res.data.url
                     uni.setStorageSync('userInfo', this.userInfos)
                     resolve(res)
@@ -65,7 +64,7 @@ export const useUserInfo = defineStore('userInfo', {
         },
         async setName(userName: string) {
             return new Promise((resolve, reject) => {
-                setUserName(userName).then((res: any) => {
+                setUserName(userName).then((res) => {
                     this.userInfos.userName = res.data.userName
                     uni.setStorageSync('userInfo', this.userInfos)
                     resolve(res)
@@ -85,10 +84,10 @@ export const useUserInfo = defineStore('userInfo', {
                 })
             })
         },
-        async setAuthCard(card: any) {
+        async setAuthCard(card: UserCardVerify) {
             return new Promise((resolve, reject) => {
-                userCardVerify(card).then((res: any) => {
-                    this.userInfos.auth.card = res.data.data
+                userCardVerify(card).then((res) => {
+                    this.userInfos.auth.card = res.data
                     uni.setStorageSync('userInfo', this.userInfos)
                     resolve(res)
                 }).catch(error => {
@@ -102,7 +101,7 @@ export const useUserInfo = defineStore('userInfo', {
         },
         async refreshToken(token: string) {
             return new Promise((resolve, reject) => {
-                userTokenRefresh(token).then((res: any) => {
+                userTokenRefresh(token).then((res) => {
                     this.token = res.data.token
                     uni.setStorageSync('token', res.data.token)
                     resolve(res)

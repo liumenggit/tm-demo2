@@ -59,11 +59,11 @@
   </tm-app>
 </template>
 <script lang="ts" setup>
-import {computed, getCurrentInstance, ref} from "vue";
+import {computed, getCurrentInstance, Ref, ref} from "vue";
 import {onLoad, onReady} from "@dcloudio/uni-app";
 import {getWindow, isPhone, toast, torpx} from "@/tmui/tool/function/util";
 import * as dayjs from "@/tmui/tool/dayjs/esm/index"
-import {phoneCodeSend, userBespeak} from "@/services/api/AppApi";
+import {userBespeak} from "@/services/api/user/bespeak";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
 const DayJs = dayjs.default;
@@ -93,12 +93,13 @@ function weekChange(date: string) {
 }
 
 //时间列表
-const bespeak = ref([])
+let bespeak: Ref<UserBespeakModel>;
+bespeak = ref({});
 const topFresh = ref(false)
 
 function getBespeakList() {
   topFresh.value = true
-  userBespeak({type: segId.value, date: weekbar.value}).then((res: any) => {
+  userBespeak({type: segId.value, date: weekbar.value}).then((res) => {
     topFresh.value = false
     bespeak.value = res.data.list
   })

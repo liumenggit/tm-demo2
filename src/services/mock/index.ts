@@ -153,3 +153,5 @@ Mock.mock('user/bespeak', {
         'status|1': [true, false]
     }]
 })
+
+export default Mock

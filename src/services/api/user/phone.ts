@@ -2,7 +2,7 @@ import {request} from "@/utils/http";
 import {PhoneCodeVerify} from "@/services/model/page";
 import {HttpResponse} from "luch-request";
 
-export function phoneCodeSend(phone: number) {
+export function phoneCodeSend(phone: number): Promise<HttpResponse<{ msg: string }>> {
     return request.post('phone/code/send', {phone: phone})
 }
 

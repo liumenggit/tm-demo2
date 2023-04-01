@@ -21,6 +21,7 @@ const request = createRequest()
 
 request.interceptors.request.use(
     (options) => {
+        console.log('options',options)
         if (options.custom?.auth) {
             return Promise.reject(options)
         }
