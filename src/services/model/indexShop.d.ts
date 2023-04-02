@@ -5,12 +5,12 @@ declare interface IndexShop {
     list: Array<IndexShopList>
 }
 
-interface IndexShopGrid {
+declare interface IndexShopGrid {
     url: string,
     image: string
 }
 
-interface IndexShopList {
+declare interface IndexShopList {
     rightDetail: {
         title: string
         subtitle: string
