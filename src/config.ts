@@ -1,5 +1,5 @@
 //config.ts
-import {useTmRouterAfter, useTmRouterBefore} from "./router/index"
+import {useTmRouterAfter, useTmRouterBefore} from "@/router"
 
 export const config = {
     // 在进阶指南中会讲到类型文件的使用。请注意右右侧文档栏目。
