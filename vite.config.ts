@@ -3,11 +3,38 @@ import uni from "@dcloudio/vite-plugin-uni";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import tmuiCss from "./src/tmui/tool/vitePlugs/tmuiCss";
 import {resolve} from "path"
-// https://vitejs.dev/config/
 import type {ConfigEnv, UserConfig} from 'vite'
 import {loadEnv} from 'vite'
 
-export default ({mode}: ConfigEnv): UserConfig => {
+const fs = require('fs');
+const manifestPath = './src/manifest.json';
+let Manifest = fs.readFileSync(manifestPath, {encoding: 'utf-8'});
+
+function replaceManifest(path: string, value: any) {
+    const arr = path.split('.');
+    const len = arr.length;
+    const lastItem = arr[len - 1];
+
+    let i = 0;
+    let ManifestArr = Manifest.split(/\n/);
+
+    for (let index = 0; index < ManifestArr.length; index++) {
+        const item = ManifestArr[index];
+        if (new RegExp(`"${arr[i]}"`).test(item)) ++i;
+        if (i === len) {
+            const hasComma = /,/.test(item);
+            ManifestArr[index] = item.replace(
+                new RegExp(`"${lastItem}"[\\s\\S]*:[\\s\\S]*`),
+                `"${lastItem}": ${value}${hasComma ? ',' : ''}`
+            );
+            break;
+        }
+    }
+
+    Manifest = ManifestArr.join('\n');
+}
+
+export default ({mode}: ConfigEnv) => {
     const root = process.cwd()
     const env = loadEnv(mode, root)
     // 在控制台输出环境变量
@@ -41,6 +68,14 @@ export default ({mode}: ConfigEnv): UserConfig => {
             uni(),
             vueJsx(),
             tmuiCss(),
+            () => {
+                // replaceManifest('app-plus.usingComponents', false);
+                // replaceManifest('app-plus.splashscreen.alwaysShowBeforeRender', false);
+                // replaceManifest('mp-weixin.appid', '"wx50693dd0b5cb3b6d"');
+                // fs.writeFileSync(manifestPath, Manifest, {
+                //     flag: 'w',
+                // });
+            }
         ],
     }
 }

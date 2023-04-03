@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import {phoneCodeVerify} from "@/services/api/user/phone";
+import {phoneCodeVerify} from "@/services/api/phone";
 import {userLogin} from "@/services/api/user/login";
 import {imageUpload} from "@/services/api/imageUpload";
 import {setUserName} from "@/services/api/user/nickname";
@@ -31,7 +31,7 @@ export const useUserInfo = defineStore('userInfo', {
         }
     },
     actions: {
-        async login(code: ILoginParams) {
+        async login(code: ILoginParams):Promise<HttpResponse<UserInfosStates>> {
             return new Promise((resolve, reject) => {
                 userLogin(code).then((res) => {
                     this.userInfos = res.data.userInfos

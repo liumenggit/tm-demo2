@@ -42,7 +42,6 @@
 </template>
 <script lang="ts" setup>
 import {ref, getCurrentInstance, nextTick} from "vue"
-import {userLogin} from "@/services/api/AppApi";
 import store from "@/store"
 import {toast} from "@/tmui/tool/function/util";
 

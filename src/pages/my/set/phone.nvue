@@ -22,7 +22,7 @@
 import store from '@/store'
 import {getCurrentInstance, ref} from "vue";
 import {isPhone, toast} from "@/tmui/tool/function/util";
-import {phoneCodeSend} from "@/services/api/user/phone";
+import {phoneCodeSend} from "@/services/api/phone";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
 const useUserInfo = store.useUserInfo()
