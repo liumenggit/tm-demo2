@@ -1,0 +1,62 @@
+<template>
+    <tm-app>
+    </tm-app>
+</template>
+
+<script lang="ts" setup>
+import {
+    ref,
+    Ref
+} from "vue"
+//TODO 常量命名（CONSTANT_CASE）表示某个值不可被修改。它还可以用于虽然技术上可以实现，但是用户不应当试图修改的值，比如并未进行深度冻结（deep frozen）的值。
+const UNIT_SUFFIXES = {
+    'milliseconds': 'ms',
+    'seconds': 's',
+};
+
+//TODO 接口本身使用 UpperCamelCase 方式命名，不要在接口名前加I。接口成员使用 lowerCamelCase 方式命名。
+declare interface UserCard {
+    //接口成员 小驼峰
+    memberTotal: number;
+    //接口成员 小驼峰
+    groupName: string;
+
+    camelCaseFunc?(): number;
+}
+
+//TODO 变量使用 camelCase 方式命名。
+let userCard: Ref<UserCard> = ref({memberTotal: 123, groupName: '字符串使用单引号'})
+//TODO 解构访问和使用对象的多个属性时，使用对象解构。
+const {memberTotal, groupName} = userCard.value
+console.log(memberTotal, groupName)
+
+//TODO 引用类型变量应该保证类型正确，不正确的需要手动声明。
+let countList: number[] = []
+console.log(countList)
+
+const foo = ref()
+const users = foo.value[]
+
+//TODO 枚举对象使用UpperCamelCase 枚举值使用 CONSTANT_CASE
+enum ResultEnum {
+    SUCCESS = 0
+}
+
+class TodoItem {
+    //TODO 接口名称中应包含创建这一接口的原因。（例如，在为类 TodoItem 创建一个将其转为 JSON 格式以用于存储或者序列化的接口时，可以将这一接口命名为 TodoItemStorage 。）
+    TodoItemStorage() {
+
+    }
+
+    //TODO 方法名使用动词+名词
+    setUserName() {
+
+    }
+
+    //TODO 函数使用 lowerCamelCase 方式命名。
+    lowerCamelCase() {
+    }
+}
+</script>
+<style>
+</style>

@@ -9,6 +9,6 @@ declare interface UserBespeakModel {
 
 declare interface UserBespeakItemModel {
     title: string
-    lable: number
+    label: number
     status: boolean
 }

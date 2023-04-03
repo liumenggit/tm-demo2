@@ -84,7 +84,7 @@ export const useUserInfo = defineStore('userInfo', {
                 })
             })
         },
-        async setAuthCard(card: UserCardVerify) {
+        async setAuthCard(card: UserCardVerifyParams) {
             return new Promise((resolve, reject) => {
                 userCardVerify(card).then((res) => {
                     console.log('认证返回',res)

@@ -1,4 +1,4 @@
-interface upload {
+declare interface Upload {
     header: object
     data: {
         code: number,
@@ -7,5 +7,3 @@ interface upload {
     },
     statusCode: number
 }
-
-export {upload}
