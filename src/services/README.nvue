@@ -1,5 +1,17 @@
 <template>
     <tm-app>
+        <tm-sheet>
+            <tm-text :label="name"></tm-text>
+            <tm-text :label="age + UNIT_SUFFIXES.age"></tm-text>
+            <tm-text :label="userInfo.nickName"></tm-text>
+            <tm-text :label="userInfo.card"></tm-text>
+            <!--必须使用三等号（ === ）和对应的不等号（ !== ）.两等号会在比较的过程中进行类型转换,这非常容易导致难以理解的错误-->
+            <!--null undefined 例外-->
+            <tm-text
+                    :label="userInfo.isLogin as number === ResultEnum.SUCCESS?UNIT_SUFFIXES.auth:UNIT_SUFFIXES.ontAuth"></tm-text>
+            <tm-text :label="counItem" v-for="(counItem,counIndex) in countList" :key="counIndex"></tm-text>
+            <tm-text :label="shopItem" v-for="(shopItem,shopIndex) in shopList" :key="shopIndex"></tm-text>
+        </tm-sheet>
     </tm-app>
 </template>
 
@@ -8,34 +20,51 @@ import {
     ref,
     Ref
 } from "vue"
-//TODO 常量命名（CONSTANT_CASE）表示某个值不可被修改。它还可以用于虽然技术上可以实现，但是用户不应当试图修改的值，比如并未进行深度冻结（deep frozen）的值。
+//TODO 不要使用 @ts-ignore.表面上看，这是一个“解决”编译错误的简单方法,但实际上,编译错误往往是由其它更大的问题导致的,因此正确的做法是直接解决这些问题本身.
+//TODO 常量命名（CONSTANT_CASE）表示某个值不可被修改.它还可以用于虽然技术上可以实现,但是用户不应当试图修改的值,比如并未进行深度冻结（deep frozen）的值.
 const UNIT_SUFFIXES = {
-    'milliseconds': 'ms',
-    'seconds': 's',
+    'age': '岁',
+    'cm': '厘米',
+    'kg': '千克',
+    'auth': '已认证',
+    'ontAuth': '未认证'
 };
 
-//TODO 接口本身使用 UpperCamelCase 方式命名，不要在接口名前加I。接口成员使用 lowerCamelCase 方式命名。
-declare interface UserCard {
+//TODO 接口本身使用 UpperCamelCase 方式命名,不要在接口名前加I.接口成员使用 lowerCamelCase 方式命名.
+declare interface UserInfo {
     //接口成员 小驼峰
-    memberTotal: number;
+    age: number;
     //接口成员 小驼峰
-    groupName: string;
-
+    nickName: string;
+    name: string;
+    //接口成员混合类型
+    card: string | number;
+    //认证状态 可有可无
+    isLogin?: boolean;
     camelCaseFunc?(): number;
 }
 
-//TODO 变量使用 camelCase 方式命名。
-let userCard: Ref<UserCard> = ref({memberTotal: 123, groupName: '字符串使用单引号'})
-//TODO 解构访问和使用对象的多个属性时，使用对象解构。
-const {memberTotal, groupName} = userCard.value
-console.log(memberTotal, groupName)
+//TODO 变量使用 camelCase 方式命名.经常会变量与接口名称一致,所以变量小驼峰,接口大驼峰便于区分.
+let userInfo: Ref<UserInfo> = ref({age: 18, nickName: '刘老六', name: '刘猛', card: 15210419930000})
+//TODO 解构访问和使用对象的多个属性时,使用对象解构.
+const {name, age} = userInfo.value
+console.log(name, age)
 
-//TODO 引用类型变量应该保证类型正确，不正确的需要手动声明。
-let countList: number[] = []
-console.log(countList)
+//TODO 引用类型变量应该保证类型正确,不正确的需要手动声明.
+let countList: number[] = Array.from<number>({length: 5}).fill(0);
+let shopList = ['第一', '第二']
+//TODO 使用 push 添加数据
+countList.push(1)
+shopList.push('addItem')
+//TODO 展开运算符
+const foo = {
+    num: 1,
+};
 
-const foo = ref()
-const users = foo.value[]
+const foo2 = {
+    ...foo,
+    num: 5,
+};
 
 //TODO 枚举对象使用UpperCamelCase 枚举值使用 CONSTANT_CASE
 enum ResultEnum {
@@ -43,7 +72,16 @@ enum ResultEnum {
 }
 
 class TodoItem {
-    //TODO 接口名称中应包含创建这一接口的原因。（例如，在为类 TodoItem 创建一个将其转为 JSON 格式以用于存储或者序列化的接口时，可以将这一接口命名为 TodoItemStorage 。）
+    //TODO 字段初始化省略构造函数
+    private readonly userList: string[] = [];
+    //TODO 私有属性和方法添加下划线前缀
+    private _toastCount: number = 1
+
+    private _log() {
+        console.log(this._toastCount);
+    }
+
+    //TODO 接口名称中应包含创建这一接口的原因.（例如,在为类 TodoItem 创建一个将其转为 JSON 格式以用于存储或者序列化的接口时,可以将这一接口命名为 TodoItemStorage .）
     TodoItemStorage() {
 
     }
@@ -53,7 +91,7 @@ class TodoItem {
 
     }
 
-    //TODO 函数使用 lowerCamelCase 方式命名。
+    //TODO 函数使用 lowerCamelCase 方式命名.
     lowerCamelCase() {
     }
 }
