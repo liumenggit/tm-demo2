@@ -5,5 +5,5 @@ export function mockTest() {
 }
 
 export function indexCommend() {
-    return request.get('index/commend')
+    return request.get<IndexShop>('index/commend')
 }

@@ -1,6 +1,6 @@
 import {request} from "@/utils/http";
 
 
-export function indexShop(): Promise<HttpResponse<IndexShop>> {
-    return request.get('index/shop')
+export function indexShop(){
+    return request.get<IndexShop>('index/shop')
 }

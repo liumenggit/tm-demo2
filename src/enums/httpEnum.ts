@@ -7,5 +7,5 @@ export enum ResultEnum {
   NOTFOUND = 400, // 未找到
   UNAUTHORIZED = 401, // 未授权
   SERVERERROR = 500, // 服务错误
-  CUSTOM_SUCCESS = 10000, // 自定义成功
+  CUSTOM_SUCCESS = 200, // 自定义成功
 }

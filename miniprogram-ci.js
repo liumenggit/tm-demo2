@@ -1,3 +1,4 @@
+// https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html
 const ci = require('miniprogram-ci');
 const fs = require('fs')
 const manifest = JSON.parse(fs.readFileSync('./src/manifest.json', 'utf8'))

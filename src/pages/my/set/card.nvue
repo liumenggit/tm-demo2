@@ -32,7 +32,7 @@ const cardForm = ref({
 
 const confirm = (e: any) => {
   if (e.validate) {
-    useUserInfo.setAuthCard(e.data).then((res: any) => {
+    useUserInfo.setAuthCard(e.data).then((res) => {
       setTimeout(() => {
         console.log('延迟执行')
         uni.navigateBack()

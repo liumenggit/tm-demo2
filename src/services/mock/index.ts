@@ -42,55 +42,68 @@ Mock.mock('/list', {
 })
 
 Mock.mock('index/commend', {
-    carousel: [
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-    ],
-    'grid|10': [{
-        url: 'page/index/index',
-        image: "https://picsum.photos/80/80",
-        'title|+1': 1,
-        'class|+1': 1,
-    }],
-    'notice': ['一一二二三三四五', '七七七八八九九'],
-    'list|20': [{
-        rightDetail: {
-            title: '标题',
-            subtitle: '副标题',
-            time: '有效期时间文本'
-        },
-        type: '小说',
-        thumb: "https://picsum.photos/100/100",
-    }],
+    code: 200,
+    error: 200,
+    message: '没有问题',
+    status: '没事',
+    data: {
+        carousel: [
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+        ],
+        'grid|10': [{
+            url: 'page/index/index',
+            image: "https://picsum.photos/80/80",
+            'title|+1': 1,
+            'class|+1': 1,
+        }],
+        'notice': ['一一二二三三四五', '七七七八八九九'],
+        'list|20': [{
+            rightDetail: {
+                title: '标题',
+                subtitle: '副标题',
+                time: '有效期时间文本'
+            },
+            type: '小说',
+            thumb: "https://picsum.photos/100/100",
+        }],
+    }
+
 })
 
 Mock.mock('index/shop', {
-    carousel: [
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-        "https://picsum.photos/720/300",
-    ],
-    'grid|10': [{
-        url: 'page/index/index',
-        image: "https://picsum.photos/720/300",
-        'title|+1': 1,
-        'class|+1': 1,
-    }],
-    'notice': ['一一二二三三四五', '七七七八八九九'],
-    'list|20': [{
-        rightDetail: {
-            title: '标题',
-            subtitle: '副标题',
-            time: '有效期时间文本'
-        },
-        type: '小说',
-        thumb: "https://picsum.photos/100/100",
-    }],
+    code: 200,
+    error: 200,
+    message: '没有问题',
+    status: '没事',
+    data: {
+        carousel: [
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+            "https://picsum.photos/720/300",
+        ],
+        'grid|10': [{
+            url: 'page/index/index',
+            image: "https://picsum.photos/720/300",
+            'title|+1': 1,
+            'class|+1': 1,
+        }],
+        'notice': ['一一二二三三四五', '七七七八八九九'],
+        'list|20': [{
+            rightDetail: {
+                title: '标题',
+                subtitle: '副标题',
+                time: '有效期时间文本'
+            },
+            type: '小说',
+            thumb: "https://picsum.photos/100/100",
+        }],
+    },
 })
 
 Mock.mock('phone/code/send', {
@@ -112,11 +125,7 @@ Mock.mock('user/set/nickname', function (options: any) {
 })
 Mock.mock('user/card/verify', function (options: any) {
     console.log('认证', options.body)
-    return {
-        code: options.body.name == "认证" ? 200 : 400,
-        msg: options.body.name == "认证" ? '认证成功' : '认证失败',
-        data: options.body
-    }
+    return options.body
 })
 Mock.mock('image/upload', function (options: any) {
     return {

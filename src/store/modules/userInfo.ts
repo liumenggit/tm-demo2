@@ -87,6 +87,7 @@ export const useUserInfo = defineStore('userInfo', {
         async setAuthCard(card: UserCardVerify) {
             return new Promise((resolve, reject) => {
                 userCardVerify(card).then((res) => {
+                    console.log('认证返回',res)
                     this.userInfos.auth.card = res.data
                     uni.setStorageSync('userInfo', this.userInfos)
                     resolve(res)
