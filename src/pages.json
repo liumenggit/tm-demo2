@@ -143,6 +143,14 @@
         "titlePenetrate": "YES",
         "transparentTitle": "always"
       }
+    },
+    {
+      "path": "pages/Demo/README",
+      "style": {
+        "navigationBarTitleText": "Demo",
+        "titlePenetrate": "YES",
+        "transparentTitle": "always"
+      }
     }
   ],
   "globalStyle": {
@@ -203,6 +211,10 @@
       {
         "name": "内容",
         "path": "pages/content/content"
+      },
+      {
+        "name": "内容",
+        "path": "pages/Demo/README"
       }
     ]
   }

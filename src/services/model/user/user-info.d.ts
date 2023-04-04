@@ -17,7 +17,7 @@ declare interface ILoginParams {
 }
 
 declare interface UserInfosStates {
-    userInfos: ILogin
+    userInfo: ILogin
     token: string,
     refresh_token: string
 }

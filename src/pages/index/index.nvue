@@ -154,8 +154,8 @@ import {
 import tmApp from "@/tmui/components/tm-app/tm-app.vue"
 import tmMessage from "@/tmui/components/tm-message/tm-message.vue"
 import {getWindow, topx, torpx} from "@/tmui/tool/function/util";
-import {indexCommend, mockTest} from "@/services/api/test";
-import {indexShop} from "@/services/api/indexShop";
+import {indexCommend} from "@/services/api/index-commend";
+import {indexShop} from "@/services/api/index-shop";
 import TmGuide from "@/components/tm-guide/tm-guide.vue";
 import TmXima from "@/components/tm-xima/tm-xima.vue";
 
@@ -244,14 +244,8 @@ function tabschange(index: string) {
 }
 
 onLoad(() => {
-  // mockTest().then((res) => {
-  //   console.log('mockTest', res.data)
-  // })
 })
 onShow(() => {
-  // mockTest().then((res) => {
-  //   console.log('mockTest', res.data)
-  // })
 })
 onReady(() => {
   const query = uni.createSelectorQuery().in(proxy);

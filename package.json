@@ -30,7 +30,7 @@
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
-    "build:mp-weixin-upload": "node miniprogram-ci.js"
+    "build:mp-weixin-upload": "uni build -p mp-weixin && node miniprogram-ci.js"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-3061320221209001",
@@ -46,6 +46,7 @@
     "@dcloudio/uni-mp-toutiao": "3.0.0-3061320221209001",
     "@dcloudio/uni-mp-weixin": "3.0.0-3061320221209001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3061320221209001",
+    "@ls-lint/ls-lint": "^1.11.2",
     "@vitejs/plugin-vue-jsx": "^2.1.0",
     "better-mock": "^0.3.6",
     "echarts": "5.3.2",

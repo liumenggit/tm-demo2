@@ -1,0 +1,22 @@
+ls:
+  .js: kebab-case
+  .ts: kebab-case
+  .json: kebab-case
+  .vue: PascalCase
+  .tsx: PascalCase
+  .d.ts: kebab-case
+  src/components:
+    .dir: kebab-case
+    .vue: kebab-case
+  src/enums:
+    .ts: camelcase
+
+ignore:
+  - .git
+  - node_modules
+  - dist
+  - src/tmui
+  - src/hybrid/html/js
+  - postcss.config.js
+  - vite.config.ts
+  - src/androidPrivacy.json

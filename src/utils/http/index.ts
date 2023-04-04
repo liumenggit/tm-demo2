@@ -1,6 +1,6 @@
 import Request from 'luch-request/src/lib/luch-request'
 import {getBaseUrl} from '@/utils/env'
-import {ApiResult} from "@/services/model/apiResult";
+import {ApiResult} from "@/services/model/api-result";
 import {ResultEnum} from "@/enums/httpEnum";
 import {toast} from "@/tmui/tool/function/util";
 import HttpRequest from "luch-request/src/lib/luch-request";
@@ -42,14 +42,14 @@ request.interceptors.response.use(
         if (statusCode !== 200) {
             toast(response.errMsg)
             response.data = {error: 1, message: response.errMsg}
-            return Promise.reject(data)
+            return Promise.reject(response)
         }
         // 验证自定义错误码
         const {error, message, code} = data as ApiResult
         if (code === ResultEnum.SUCCESS || code === ResultEnum.CUSTOM_SUCCESS)
-            return Promise.resolve(data)
+            return Promise.resolve(response)
         message && toast(message)
-        return Promise.reject(data)
+        return Promise.reject(response)
     },
     (error) => {
         return Promise.reject(error)

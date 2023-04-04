@@ -3,42 +3,62 @@ import Mock from "better-mock/dist/mock.mp";
 Mock.setup({timeout: 200})
 
 Mock.mock('user/login', {
-    msg: '登录成功',
+    message: '登录成功',
     code: 200,
-    userInfo: {
-        userName: '刘老六',
-        phone: '18647012056',
-        avatar: 'https://picsum.photos/80/80',
-        roles: [],
-        authBtnList: [],
-        auth: {
-            card: {
-                name: '刘老六',
-                cardId: '152104199312251919'
+    data: {
+        userInfo: {
+            userName: '刘老六',
+            phone: '18647012056',
+            avatar: 'https://picsum.photos/80/80',
+            roles: [],
+            authBtnList: [],
+            auth: {
+                card: {
+                    name: '刘老六',
+                    cardId: '152104199312251919'
+                }
             }
-        }
-    },
-    token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv',
-    refresh_token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv'
+        },
+        token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv',
+        refresh_token: '185|z8zw9AdGA0Gnxv5E92PjWw3jNNWFTfQVm6wn1Yrv'
+    }
 })
 
 Mock.mock('user/logout', {
-    msg: '退出成功'
+    code: 200,
+    error: 200,
+    message: '退出成功',
+    status: '没事',
 })
 
 Mock.mock('user/update', {
-    msg: '更新成功'
+    code: 200,
+    error: 200,
+    message: '更新成功',
+    status: '没事',
 })
 
 Mock.mock('user', {
-    userName: '用户昵称'
+    code: 200,
+    error: 200,
+    message: '没有问题',
+    status: '没事',
+    data: {
+        userName: '昵称……'
+    }
 })
 
 Mock.mock('/list', {
-    'list|10': [{
-        'id|+1': 1,
-        'email': '@EMAIL'
-    }]
+    code: 200,
+    error: 200,
+    message: '没有问题',
+    status: '没事',
+    data: {
+        'list|10': [{
+            'id|+1': 1,
+            'email': '@EMAIL'
+        }]
+    }
 })
 
 Mock.mock('index/commend', {
@@ -106,38 +126,45 @@ Mock.mock('index/shop', {
     },
 })
 
-Mock.mock('phone/code/send', {
-    msg: '发送成功'
+Mock.mock('phone/code/send', function (options: any) {
+    return {
+        code: 200,
+        message: '发送成功',
+        data: {}
+    }
 })
 Mock.mock('phone/code/verify', function (options: any) {
     return {
         code: options.body.code == 1234 ? 200 : 400,
-        msg: options.body.code == 1234 ? '验证成功' : '验证码错误',
-        phone: options.body.phone
+        message: options.body.code == 1234 ? '验证成功' : '验证码错误',
+        data: options.body
     }
 })
 Mock.mock('user/set/nickname', function (options: any) {
     return {
         code: options.body.userName !== "违法" ? 200 : 400,
-        msg: options.body.userName !== "违法" ? '修改成功' : '昵称违法',
-        userName: options.body.userName
+        message: options.body.userName !== "违法" ? '修改成功' : '昵称违法',
+        data: options.body
     }
 })
 Mock.mock('user/card/verify', function (options: any) {
-    console.log('认证', options.body)
-    return options.body
+    return {
+        code: options.body.name === "认证" ? 200 : 400,
+        message: options.body.name === "认证" ? '修改成功' : '认证信息错误',
+        data: options.body
+    }
 })
 Mock.mock('image/upload', function (options: any) {
     return {
         code: 200,
-        msg: '上传成功',
-        url: options.body
+        message: '上传成功',
+        data: options.body
     }
 })
 Mock.mock('token/refresh', function (options: any) {
     return {
         code: 200,
-        msg: '更新token成功',
+        message: '更新token成功',
         token: options.body
     }
 })
@@ -145,22 +172,24 @@ Mock.mock('token/refresh', function (options: any) {
 Mock.mock('user/bespeak', {
     code: 200,
     msg: '更新token成功',
-    'list|10': [{
-        'title|+1': [
-            '08:00-09:00',
-            '09:00-10:00',
-            '10:00-11:00',
-            '11:00-12:00',
-            '12:00-13:00',
-            '13:00-14:00',
-            '14:00-15:00',
-            '15:00-16:00',
-            '16:00-17:00',
-            '17:00-18:00'
-        ],
-        'label|0-100': 1,
-        'status|1': [true, false]
-    }]
+    data: {
+        'list|10': [{
+            'title|+1': [
+                '08:00-09:00',
+                '09:00-10:00',
+                '10:00-11:00',
+                '11:00-12:00',
+                '12:00-13:00',
+                '13:00-14:00',
+                '14:00-15:00',
+                '15:00-16:00',
+                '16:00-17:00',
+                '17:00-18:00'
+            ],
+            'label|0-100': 1,
+            'status|1': [true, false]
+        }]
+    }
 })
 
 export default Mock

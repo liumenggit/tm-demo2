@@ -1,6 +1,6 @@
 export interface ApiResultOf<T> {
     code: number
-    data?: T
+    data: T
     error?: number
     message?: string
     status?: string

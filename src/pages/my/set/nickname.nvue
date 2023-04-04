@@ -21,13 +21,13 @@ import store from '@/store'
 const proxy = getCurrentInstance()?.proxy ?? null;
 const useUserInfo = store.useUserInfo()
 const nickNameFrom = ref({
-  userName: useUserInfo.userInfos.userName,
+  userName: useUserInfo.userInfo.userName,
 })
 
 
 const confirm = (e: any) => {
   if (e.validate) {
-    useUserInfo.setName(e.data.userName).then((res: any) => {
+    useUserInfo.setName(e.data.userName).then((res) => {
       nickNameFrom.value.userName = res.data.userName
       setTimeout(() => {
         uni.navigateBack()

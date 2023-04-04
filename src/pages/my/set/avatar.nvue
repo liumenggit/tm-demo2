@@ -20,10 +20,10 @@ import {getCurrentInstance, ref} from "vue";
 
 const proxy = getCurrentInstance()?.proxy ?? null;
 const useUserInfo = store.useUserInfo()
-const userAvatar = ref(useUserInfo.userInfos.avatar)
+const userAvatar = ref(useUserInfo.userInfo.avatar)
 
 const setAvatar = (e: any) => {
-  store.useUserInfo().setAvatar(e.detail.avatarUrl).then((res: any) => {
+  store.useUserInfo().setAvatar(e.detail.avatarUrl).then((res) => {
     userAvatar.value = res.data.url
     setTimeout(() => {
       uni.navigateBack()
